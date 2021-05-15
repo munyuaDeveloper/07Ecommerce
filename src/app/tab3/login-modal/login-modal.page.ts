@@ -1,4 +1,4 @@
-import { ModalController } from '@ionic/angular';
+import { ModalController, LoadingController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../services/authentication.service';
@@ -13,6 +13,7 @@ export class LoginModalPage implements OnInit {
 
   LoginForm: FormGroup;
   constructor(public loginModal: ModalController,
+    private loadingController: LoadingController,
     private _formBuilder: FormBuilder,
     private _authService: AuthenticationService) { }
 
@@ -26,6 +27,7 @@ export class LoginModalPage implements OnInit {
   dismiss(data) {
 
     if (data) {
+      this.handleLoadingEffect()
       this._authService.loginUser(data).subscribe(res =>{
         console.log(res);
         localStorage.setItem('access_token', res['access'])
@@ -38,6 +40,14 @@ export class LoginModalPage implements OnInit {
       this.loginModal.dismiss(null);
     }
 
+  }
+  async handleLoadingEffect() {
+    const loading = await this.loadingController.create({
+      message: 'Please wait...',
+      duration: 2500
+    });
+
+    await loading.present();
   }
 
 }
