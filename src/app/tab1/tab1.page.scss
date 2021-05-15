@@ -1,0 +1,42 @@
+.container {
+  position: relative;
+  width: 100%;
+}
+
+.slidetitle {
+  position: absolute;
+  bottom: 60px;
+  left: 18px;
+  color: white;
+  text-align: left;
+  font-family: "Libre Baskerville", serif;
+}
+
+.block {
+  background-color: #33110d;
+  opacity: 0.5;
+  padding: 4px;
+}
+
+.price {
+  position: absolute;
+  bottom: 25px;
+  left: 20px;
+  color: rgb(240, 240, 240);
+  font-size: 15px !important;
+  font-weight: 300;
+  text-shadow: 1px 1px 3px #000000;
+}
+
+.sub-headers {
+  font-weight: bold;
+  background-color: #33110d;
+  color: #fff;
+  padding: 1px 20px;
+}
+ion-icon {
+  font-size: 25px; //Preferred size here
+}
+.card-content-md {
+  padding-top: 0px;
+}

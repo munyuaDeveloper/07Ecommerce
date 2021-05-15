@@ -7,6 +7,25 @@
 </ion-header>
 
 <ion-content fullscreen>
+  <div class="sub-headers">
+    <p>Latest In Town</p>
+</div>
+  <ion-slides class="slide-padding" pager="true" [options]="slideOptsOne">
+    <ion-slide *ngFor="let product of products_featured">
+        <div class="container">
+            <ion-img [src]="product.image"></ion-img>
+            <h2 class="slidetitle">
+                <span class="block">{{product.title}}</span>
+            </h2>
+            <p class="price">Price {{product.price | currency}}</p>
+        </div>
+    </ion-slide>
+
+</ion-slides>
+
+<div class="sub-headers">
+  <p>Our Products </p>
+</div>
   <ion-card *ngFor="let product of products">
     <img [src]="product?.image" />
     <ion-card-header>
@@ -14,11 +33,16 @@
     </ion-card-header>
     <ion-card-content>
      {{product?.overview}}
-     <ion-item-divider></ion-item-divider>
-
-     <ion-text slot="end" color="danger">Price: {{product?.price | currency}}</ion-text><br>
-
-    <ion-button color="primary">Add To Cart</ion-button>
+     <ion-grid>
+      <ion-row>
+        <ion-col>
+           <ion-text color="danger">Price: {{product?.price | currency}}</ion-text>
+        </ion-col>
+        <ion-col size="2">
+          <ion-icon name="bag-add-outline" size="3"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
     </ion-card-content>
   </ion-card>
 </ion-content>

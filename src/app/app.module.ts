@@ -8,6 +8,9 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import { TokenInterceptorService } from './shared/tokenInterceptor';
+import { ErrorInterceptorService } from './shared/errorInterceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,13 +20,25 @@ import { ReactiveFormsModule } from '@angular/forms';
     IonicModule.forRoot(),
     AppRoutingModule,
     ReactiveFormsModule,
-    LoginModalPageModule
+    LoginModalPageModule,
+    HttpClientModule
   ],
   providers: [
     {
       provide: RouteReuseStrategy,
       useClass: IonicRouteStrategy
-    }
+    },
+    // interceptors
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptorService,
+      multi: true
+    },
   ],
   bootstrap: [AppComponent],
 })

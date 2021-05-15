@@ -5,45 +5,53 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-content fullscreen>
 
-<ion-split-pane when="xs">
-  <!--  our side menu  -->
-  <ion-menu [content]="content">
-    <ion-content>
-      <div class="centervert">
-        <button ion-button large block clear icon-only [color]="isList ? 'primary' : 'light'" (click)="togglePage('List')">
-        <ion-icon name="md-list"></ion-icon>
-      </button>
-        <button ion-button large block clear icon-only [color]="isLocation ? 'primary' : 'light'" (click)="togglePage('Location')">
-        <ion-icon name="md-pin"></ion-icon>
-      </button>
-        <button ion-button large block clear icon-only [color]="isSelf ? 'primary' : 'light'" (click)="togglePage('Self')">
-        <ion-icon name="md-person"></ion-icon>
-      </button>
-        <button ion-button large block clear icon-only [color]="isNotifications ? 'primary' : 'light'" (click)="togglePage('Notifications')">
-        <ion-icon name="md-notifications"></ion-icon>
-      </button>
-        <button ion-button large block clear icon-only [color]="isSearch ? 'primary' : 'light'" (click)="togglePage('Search')">
-        <ion-icon name="md-search"></ion-icon>
-      </button>
-        <button ion-button large block clear icon-only [color]="isCamera ? 'primary' : 'light'" (click)="togglePage('Camera')">
-        <ion-icon name="md-camera"></ion-icon>
-      </button>
 
-      </div>
 
-    </ion-content>
-    <ion-footer>
-      <button ion-button large block clear icon-only>
-        <ion-icon name="settings"></ion-icon>
-      </button>
-      <button ion-button large block clear icon-only>
-        <ion-icon name="log-out"></ion-icon>
-      </button>
-    </ion-footer>
+  <ion-grid  class="no-padding">
+    <ion-row class="no-padding">
+      <ion-col size="4">
+        <ion-list  class="no-padding">
+          <ion-item>
+            <ion-label>Men Shoes</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Shirts</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Dress</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Women Shoes</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Kids Ware</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+      <ion-col>
+        <ion-card *ngFor="let product of products">
+          <ion-card-header>
+              <ion-text >{{product?.title}}</ion-text>
+          </ion-card-header>
 
-  </ion-menu>
+          <img [src]="product?.image" />
+          <ion-card-content>
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                   <ion-text color="danger">Price: {{product?.price | currency}}</ion-text>
+                </ion-col>
+                <ion-col size="2">
+                  <ion-icon name="bag-add-outline" size="3"></ion-icon>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
 
-  <!-- the main content -->
-  <ion-nav [root]="rootPage" main #content></ion-nav>
-</ion-split-pane>
+    </ion-row>
+    </ion-grid>
+</ion-content>
