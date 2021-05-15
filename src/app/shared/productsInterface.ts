@@ -1,7 +1,7 @@
 export interface ProductInterface {
-  title: String,
-  overview: String,
-  image: String,
-  category: String,
-  price: Number
+  title: string,
+  overview: string,
+  image: string,
+  category: string,
+  price: string
 }

@@ -1,7 +1,7 @@
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { LoadingController, ModalController } from '@ionic/angular';
 import { LoginModalPage } from './login-modal/login-modal.page';
 import { AuthenticationService } from './services/authentication.service';
 import jwt_decode from "jwt-decode"
@@ -23,7 +23,8 @@ export class Tab3Page {
     public modalController: ModalController,
     public router: Router,
     public _authService: AuthenticationService,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    private loadingController: LoadingController
   ) {
 
    }
@@ -63,6 +64,7 @@ export class Tab3Page {
 
   RegisterUser() {
     const body = this.RegistrationForm.value;
+    this.handleLoadingEffect()
     this._authService.UserRegistration(body).subscribe(res=>{
       this.openModal();
     })
@@ -86,4 +88,12 @@ export class Tab3Page {
     this.userEmail = decoded['email']
   }
 
+  async handleLoadingEffect() {
+    const loading = await this.loadingController.create({
+      message: 'Please wait...',
+      duration: 2500
+    });
+
+    await loading.present();
+  }
 }

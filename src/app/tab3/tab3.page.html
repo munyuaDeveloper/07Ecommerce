@@ -13,6 +13,7 @@
     </ion-card-header>
     <form  [formGroup]="RegistrationForm">
       <ion-card-content>
+
           <ion-item>
             <ion-label position="floating">Name</ion-label>
             <ion-input formControlName="name"></ion-input>
@@ -33,7 +34,9 @@
             <ion-input formControlName="password2" type="password"></ion-input>
           </ion-item>
 
-          <ion-button expand="block" class="submit_button" [disabled]="RegistrationForm.invalid" (click)="RegisterUser()">Register</ion-button>
+          <ion-button expand="block" class="submit_button" [disabled]="RegistrationForm.invalid" (click)="RegisterUser()">
+          Register
+          </ion-button>
 
           <ion-text>Do you have an account? <a (click)="openModal()">Login here</a></ion-text>
 
