@@ -11,10 +11,25 @@
       <ion-label>Categories</ion-label>
     </ion-tab-button>
 
+      <ng-template ngxPermissionsOnly="Admin">
+        <ion-tab-button tab="admin">
+          <ion-icon name="logo-buffer"></ion-icon>
+          <ion-label>Admin</ion-label>
+        </ion-tab-button>
+      </ng-template>
+
+      <ng-template ngxPermissionsOnly="Reseller">
+        <ion-tab-button tab="reseller">
+          <ion-icon name="logo-buffer"></ion-icon>
+          <ion-label>Reseller</ion-label>
+        </ion-tab-button>
+      </ng-template>
+
     <ion-tab-button tab="tab3">
       <ion-icon name="person-outline"></ion-icon>
       <ion-label>Account</ion-label>
     </ion-tab-button>
+
   </ion-tab-bar>
 
 </ion-tabs>

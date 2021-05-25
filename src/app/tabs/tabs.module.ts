@@ -6,13 +6,15 @@ import { FormsModule } from '@angular/forms';
 import { TabsPageRoutingModule } from './tabs-routing.module';
 
 import { TabsPage } from './tabs.page';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    TabsPageRoutingModule
+    TabsPageRoutingModule,
+    NgxPermissionsModule.forChild()
   ],
   declarations: [TabsPage]
 })

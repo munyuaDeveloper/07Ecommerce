@@ -11,6 +11,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { TokenInterceptorService } from './shared/tokenInterceptor';
 import { ErrorInterceptorService } from './shared/errorInterceptor';
+import { NgxPermissionsModule } from 'ngx-permissions';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +23,9 @@ import { ErrorInterceptorService } from './shared/errorInterceptor';
     AppRoutingModule,
     ReactiveFormsModule,
     LoginModalPageModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPermissionsModule.forRoot(),
+    BrowserAnimationsModule,
   ],
   providers: [
     {
