@@ -18,7 +18,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     ResellerTablePageRoutingModule,
     MatTableModule,
     MatPaginatorModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   declarations: [ResellerTablePage]
 })

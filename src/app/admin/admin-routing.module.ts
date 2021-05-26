@@ -9,9 +9,17 @@ const routes: Routes = [
     component: AdminPage
   },
   {
-    path: 'reseller-table',
+    path: 'resellers',
     loadChildren: () => import('./reseller-table/reseller-table.module').then( m => m.ResellerTablePageModule)
-  }
+  },
+  {
+    path: 'products',
+    loadChildren: () => import('./products/products.module').then( m => m.ProductsPageModule)
+  },
+  {
+    path: 'add-product',
+    loadChildren: () => import('./add-product/add-product.module').then( m => m.AddProductPageModule)
+  },
 ];
 
 @NgModule({

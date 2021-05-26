@@ -55,7 +55,7 @@ export class TokenInterceptorService implements HttpInterceptor {
 
   addAuthHeader(request: HttpRequest<any>) {
     const token = localStorage.getItem('access_token');
-    if (request.url.includes('login') || request.url.includes('register') || request.url.includes('refresh')) {
+    if (request.url.includes('login') || request.url.includes('register') || request.url.includes('refresh') || request.url.includes('fileupload')) {
       return request;
     }
     if (token) {

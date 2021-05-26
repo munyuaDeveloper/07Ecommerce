@@ -3,6 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import { ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-reseller-table',
@@ -54,7 +55,9 @@ resellers = [
 },
 ]
 
-  constructor() { }
+  constructor(
+    public resellerModal: ModalController,
+  ) { }
 
   ngOnInit() {
       this.dataSource.data = this.resellers;

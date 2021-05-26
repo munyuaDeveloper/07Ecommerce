@@ -7,13 +7,21 @@
 </ion-header>
 
 <ion-content fullscreen>
+
+<ng-template #customLoadingTemplate></ng-template>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
+
+
+
   <div class="sub-headers">
     <p>Latest In Town</p>
-</div>
+  </div>
   <ion-slides class="slide-padding" pager="true" [options]="slideOptsOne">
-    <ion-slide *ngFor="let product of products_featured">
+    <ion-slide *ngFor="let product of products">
         <div class="container">
-            <ion-img [src]="product.image"></ion-img>
+            <span *ngIf="product?.images">
+              <ion-img [src]="product?.images[0]['image']"></ion-img>
+            </span>
             <h2 class="slidetitle">
                 <span class="block">{{product.title}}</span>
             </h2>
@@ -27,12 +35,13 @@
   <p>Our Products </p>
 </div>
   <ion-card *ngFor="let product of products">
-    <img [src]="product?.image" />
+    <span *ngIf="product?.images">
+      <ion-img [src]="product?.images[0]['image']"></ion-img>
+    </span>
     <ion-card-header>
       <ion-card-title>{{product?.title}}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-     {{product?.overview}}
      <ion-grid>
       <ion-row>
         <ion-col>
