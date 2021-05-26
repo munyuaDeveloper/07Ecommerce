@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { SplashScreen } from '@capacitor/core';
 import { AlertController, Platform } from '@ionic/angular';
 import { Location } from '@angular/common';
 
