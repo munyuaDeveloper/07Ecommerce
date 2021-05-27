@@ -11,6 +11,8 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ng-template #customLoadingTemplate></ng-template>
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
   <ion-card>
     <ion-card-header>
       <ion-card-title>Login</ion-card-title>

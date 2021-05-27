@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Product Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ng-template #customLoadingTemplate></ng-template>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
+
+
+  <ion-card >
+    <ion-fab vertical="top" horizontal="end" color=secondary>
+      <ion-fab-button>
+        <ion-icon name="share-social-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-list side="bottom">
+        <ion-fab-button>
+          <ion-icon name="play-outline" color="danger"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button>
+          <ion-icon name="heart-outline" color="success"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button>
+          <ion-icon name="share-social-outline" color="primary"></ion-icon>
+        </ion-fab-button>
+      </ion-fab-list>
+    </ion-fab>
+  
+    <ion-card-header>
+      <ion-card-title>
+       {{productDetails?.title}}
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+    <ion-slides *ngIf="productDetails?.images" class="slide-padding" pager="true" [options]="slideOptsOne">
+      <ion-slide *ngFor="let img of productDetails?.images">
+          <div class="container">
+                <ion-img [src]="img?.image"></ion-img>
+          </div>
+      </ion-slide>
+
+    </ion-slides>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+           <h3 class="price_text">Price: {{productDetails?.price | currency}}</h3>
+        </ion-col>
+        <ion-col size="2">
+          <ion-icon name="cart-outline" size="4"  (click)="addToCart()"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+      {{productDetails?.description}}
+    </ion-card-content>
+    
+  </ion-card>
+</ion-content>

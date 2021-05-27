@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {LoadingController, ModalController} from "@ionic/angular";
+import {LoadingController, ModalController, ToastController} from "@ionic/angular";
 import {ProductService} from "../../services/product.service";
 
 @Component({
@@ -9,7 +9,10 @@ import {ProductService} from "../../services/product.service";
   styleUrls: ['./add-product.page.scss'],
 })
 export class AddProductPage implements OnInit {
+  @ViewChild('customLoadingTemplate', {static: false}) customLoadingTemplate: TemplateRef<any>;
+  loading = false;
   productForm: FormGroup;
+  CategoryForm: FormGroup;
   categories = [];
   selectedFile = null;
   fileIDs = {};
@@ -18,7 +21,7 @@ export class AddProductPage implements OnInit {
   application_documents: any;
 
   constructor(public addProductModal: ModalController,
-              private loadingController: LoadingController,
+              public toastController: ToastController,
               private _formBuilder: FormBuilder,
               private _productService: ProductService) {
   }
@@ -30,7 +33,12 @@ export class AddProductPage implements OnInit {
       title: ['', Validators.required],
       description: ['', Validators.required],
       price: ['', Validators.required],
+      quantity: ['', Validators.required],
       images: [[]],
+    });
+
+    this.CategoryForm = this._formBuilder.group({
+      name: ['', Validators.required],
     });
   }
 
@@ -62,22 +70,47 @@ export class AddProductPage implements OnInit {
   }
 
   createProduct() {
+    this.loading = true;
     this.productForm.patchValue({
       images : this.application_documents
     })
     this._productService.createProduct(this.productForm.value).subscribe(res => {
-      console.log(res);
+      this.loading = false;
+      this.presentToast('Product Created!')
       this.addProductModal.dismiss(this.productForm.value);
     }, error => {
-      console.error(error);
+      this.loading = false;
     });
   }
 
   submitFiles() {
+    this.loading = true
     this._productService.uploadImages(this.allFiles).subscribe(res => {
       this.application_documents = res;
       this.createProduct();
+    }, err => {
+      this.loading = false
     });
+  }
+
+  submitCategory() {
+    this.loading = true
+    this._productService.createCategory(this.CategoryForm.value).subscribe(res=>{
+      this.presentToast('Category Created!')
+      this.getCategory()
+      this.loading = false;
+    }, err => {
+      this.loading = false;
+    })
+  }
+
+  async presentToast(message) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+      color: 'success',
+    });
+    toast.present();
   }
 }
 

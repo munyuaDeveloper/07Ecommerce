@@ -1,6 +1,7 @@
 import { ProductInterface } from '../shared/productsInterface';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ProductService } from '../services/product.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -9,10 +10,10 @@ import { ProductService } from '../services/product.service';
 })
 export class Tab1Page implements OnInit {
 
-  products: ProductInterface[] = [
+  products: ProductInterface[] = []
+  total_number = 0
 
-  ]
-
+  cartItems = [];
   slideOptsOne = {
     initialSlide: 0,
     slidesPerView: 1,
@@ -21,7 +22,8 @@ export class Tab1Page implements OnInit {
 
   @ViewChild('customLoadingTemplate', {static: false}) customLoadingTemplate: TemplateRef<any>;
   loading = true;
-  constructor(private _productService: ProductService) {
+  constructor(private _productService: ProductService,
+    public toastController: ToastController,) {
 
   }
 
@@ -33,6 +35,41 @@ ngOnInit() {
   }, err => {
     this.loading = false;
   })
+
+  this.getCartItems();
 }
 
+getCartItems(){
+  this._productService.getCartItems().subscribe(res => {
+    this.cartItems = res['results'][0]['cart']
+    this.total_number = 0
+    for(let i = 0; i< this.cartItems.length; i++){
+        this.cartItems += this.cartItems[i]['products_num'];
+    }
+  })
+}
+
+
+addToCart(id) {
+  this.loading = true;
+  const body = {
+    product: id
+}
+  this._productService.addToCart(body).subscribe(res => {
+    this.loading = false;
+    this.presentToast('Product added to cart!')
+    this.getCartItems();
+  }, err => {
+    this.loading = false;
+  })
+}
+
+async presentToast(message) {
+  const toast = await this.toastController.create({
+    message: message,
+    duration: 2000,
+    color: 'success',
+  });
+  toast.present();
+}
 }

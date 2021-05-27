@@ -3,6 +3,11 @@
     <ion-title>
       Home
     </ion-title>
+
+  <ion-buttons slot="primary" class="cart_icon">
+   <ion-icon slot="end" name="cart-outline"></ion-icon>{{cartItems}}
+  </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
@@ -35,7 +40,7 @@
   <p>Our Products </p>
 </div>
   <ion-card *ngFor="let product of products">
-    <span *ngIf="product?.images">
+    <span *ngIf="product?.images" [routerLink]="['/tabs/tab1/product-details', product?.id]">
       <ion-img [src]="product?.images[0]['image']"></ion-img>
     </span>
     <ion-card-header>
@@ -45,10 +50,10 @@
      <ion-grid>
       <ion-row>
         <ion-col>
-           <ion-text color="danger">Price: {{product?.price | currency}}</ion-text>
+           <ion-text class="price_text">Price: {{product?.price | currency}}</ion-text>
         </ion-col>
         <ion-col size="2">
-          <ion-icon name="bag-add-outline" size="3"></ion-icon>
+          <ion-icon name="cart-outline" size="4" (click)="addToCart(product?.id)"></ion-icon>
         </ion-col>
       </ion-row>
     </ion-grid>

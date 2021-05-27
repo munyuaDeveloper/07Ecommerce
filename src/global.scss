@@ -83,3 +83,20 @@ mat-header-cell:last-child {
 .mat-elevation-z8 {
     box-shadow: 0px 0px 0px 0px rgb(0 0 0 / 20%), 0px 0px 0px 0px rgb(0 0 0 / 14%), 0px 0px 0px 0px rgb(0 0 0 / 12%);
 }
+
+
+.price_text {
+  color: #33110d;
+  font-size: 18px !important;
+}
+
+.cart_icon {
+  margin-right: 10px;
+  background-color: #33110dcf;
+  border-radius: 100%;
+  padding: 5px;
+  height: 38px;
+  width: 38px;
+  font-size: 12px;
+  color: #fff;
+}

@@ -1,7 +1,9 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
+import { Observable } from 'rxjs';
 import {environment} from '../../environments/environment';
+import { ProductInterface } from '../shared/productsInterface';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,13 @@ export class ProductService {
 
   private _categories = this.base_url + '/category/category-list';
 
+  private _createCategory = this.base_url + '/category/create-category'
+
   private _upLoadImages = this.base_url + '/fileupload/upload-image';
+
+  private _addToCart = this.base_url + '/cart/add-cart/'
+
+  private _listCart = this.base_url + '/cart/cart'
 
 
   constructor(private http: HttpClient, private _router: Router) {
@@ -37,6 +45,21 @@ export class ProductService {
   createProduct(data) {
     return this.http.post(this._createProduct, data);
   }
+
+  createCategory(data) {
+    return this.http.post(this._createCategory, data);
+  }
+
+  addToCart(data) {
+    return this.http.post(this._addToCart, data);
+  }
+
+  getCartItems() {
+    return this.http.get(this._listCart);
+  }
+
+
+
   uploadImages(files) {
     const headers = new HttpHeaders()
       .set('Authorization', `Bearer ${localStorage.getItem('access_token')}`);

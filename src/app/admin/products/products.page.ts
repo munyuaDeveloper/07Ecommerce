@@ -20,7 +20,7 @@ export class ProductsPage implements OnInit {
 
 
   @ViewChild('customLoadingTemplate', {static: false}) customLoadingTemplate: TemplateRef<any>;
-  loading = true;
+  loading = false;
 
   constructor(
     private _productService: ProductService,
