@@ -76,7 +76,7 @@ export class ErrorInterceptorService implements HttpInterceptor {
             }
           }
         } else {
-          console.error(error.statusText);
+         
         }
         return throwError(error);
       })

@@ -4,6 +4,10 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>Product Details</ion-title>
+
+      <ion-buttons slot="primary" class="cart_icon" routerLink="/tabs/tab1/cart-items">
+      <ion-icon slot="end" name="cart-outline"></ion-icon>{{total_number}}
+      </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -13,22 +17,6 @@
 
 
   <ion-card >
-    <ion-fab vertical="top" horizontal="end" color=secondary>
-      <ion-fab-button>
-        <ion-icon name="share-social-outline"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-list side="bottom">
-        <ion-fab-button>
-          <ion-icon name="play-outline" color="danger"></ion-icon>
-        </ion-fab-button>
-        <ion-fab-button>
-          <ion-icon name="heart-outline" color="success"></ion-icon>
-        </ion-fab-button>
-        <ion-fab-button>
-          <ion-icon name="share-social-outline" color="primary"></ion-icon>
-        </ion-fab-button>
-      </ion-fab-list>
-    </ion-fab>
   
     <ion-card-header>
       <ion-card-title>

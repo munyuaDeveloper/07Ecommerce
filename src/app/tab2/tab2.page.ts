@@ -42,13 +42,27 @@ export class Tab2Page implements OnInit {
   
     this.getCartItems();
   }
+
+  getCategoryProducts(id) {
+
+    console.log("id", id);
+    
+    this.loading = true;
+    this._productService.getProductsByCategory(id).subscribe(res => {
+      this.loading = false;
+      this.products = res['results'][0]['products']
+    }, err => {
+      this.loading = false;
+    })
+  }
   
   getCartItems(){
     this._productService.getCartItems().subscribe(res => {
-      this.cartItems = res['results'][0]['cart']
-      this.total_number = 0
-      for(let i = 0; i< this.cartItems.length; i++){
-          this.cartItems += this.cartItems[i]['products_num'];
+      if(res['results']['length']> 0) {
+        this.cartItems = res['results'][0]['cart'];
+        for(let i = 0; i< this.cartItems.length; i++){
+          this.total_number += this.cartItems[i]['products_num'];
+      }
       }
     })
   }

@@ -22,9 +22,14 @@ export class ProductService {
 
   private _upLoadImages = this.base_url + '/fileupload/upload-image';
 
-  private _addToCart = this.base_url + '/cart/add-cart/'
+  private _addToCart = this.base_url + '/cart/add-cart/';
 
-  private _listCart = this.base_url + '/cart/cart'
+  private _listCart = this.base_url + '/cart/cart';
+
+  private _deleteCart = this.base_url + '/cart/delete-cart/';
+
+  private _filterProductByCategory  = this.base_url + '/category/category-products?request_id='
+
 
 
   constructor(private http: HttpClient, private _router: Router) {
@@ -40,6 +45,10 @@ export class ProductService {
 
   getCategory() {
     return this.http.get(this._categories);
+  }
+
+  getProductsByCategory(id) {
+    return this.http.get(this._filterProductByCategory + id);
   }
 
   createProduct(data) {
@@ -58,6 +67,9 @@ export class ProductService {
     return this.http.get(this._listCart);
   }
 
+  deleteCart(data) {
+    return this.http.post(this._deleteCart, data);
+  }
 
 
   uploadImages(files) {

@@ -19,7 +19,9 @@ export class ProductDetailsPage implements OnInit {
   @ViewChild('customLoadingTemplate', {static: false}) customLoadingTemplate: TemplateRef<any>;
   loading = false;
   productDetails: ProductInterface;
-  product_id: any
+  product_id: any;
+  total_number = 0
+  cartItems = [];
 
   constructor(private productService: ProductService,
      private route: ActivatedRoute,
@@ -34,6 +36,20 @@ export class ProductDetailsPage implements OnInit {
       this.productDetails = res as ProductInterface;
       this.loading = false;
     });
+
+    this.getCartItems();
+  }
+
+  getCartItems(){
+    this.total_number = 0
+    this.productService.getCartItems().subscribe(res => {
+      if(res['results']['length']> 0) {
+        this.cartItems = res['results'][0]['cart'];
+        for(let i = 0; i< this.cartItems.length; i++){
+          this.total_number += this.cartItems[i]['products_num'];
+      }
+      }
+    })
   }
 
   addToCart() {
@@ -44,6 +60,7 @@ export class ProductDetailsPage implements OnInit {
     this.productService.addToCart(body).subscribe(res => {
       this.loading = false;
       this.presentToast('Product added to cart!')
+      this.getCartItems()
     }, err => {
       this.loading = false;
     })

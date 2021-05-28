@@ -4,9 +4,9 @@
       Categories
     </ion-title>
 
-    <ion-buttons slot="primary" class="cart_icon">
-    <ion-icon slot="end" name="cart-outline"></ion-icon>{{cartItems}}
-    </ion-buttons>
+  <ion-buttons slot="primary" class="cart_icon" routerLink="/tabs/tab1/cart-items"> 
+   <ion-icon slot="end" name="cart-outline"></ion-icon>{{total_number}}
+  </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content fullscreen>
@@ -20,7 +20,7 @@
       <ion-col size="4">
         <ion-list  class="no-padding">
           <ion-item *ngFor="let cat of categories">
-            <ion-label>{{cat?.name | titlecase}}</ion-label>
+            <ion-label (click)="getCategoryProducts(cat?.id)">{{cat?.name | titlecase}}</ion-label>
           </ion-item>
         </ion-list>
       </ion-col>
@@ -29,8 +29,9 @@
           <ion-card-header>
               <ion-text >{{product?.title}}</ion-text>
           </ion-card-header>
-
-          <img [src]="product?.image" />
+          <span *ngIf="product?.images" [routerLink]="['/tabs/tab1/product-details', product?.id]">
+            <ion-img [src]="product?.images[0]['image']"></ion-img>
+          </span>
           <ion-card-content>
             <ion-grid>
               <ion-row>
@@ -44,6 +45,8 @@
             </ion-grid>
           </ion-card-content>
         </ion-card>
+
+        <ion-text class="no_products" *ngIf="products.length === 0">No products in category!</ion-text>
       </ion-col>
 
     </ion-row>
