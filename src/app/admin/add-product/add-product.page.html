@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="primary" (click)="dismiss(null)">
+        <span ion-text color="primary" showWhen="ios"></span>
+        <ion-icon name="arrow-back-outline" showWhen="android,windows"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Add Product</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>New Category</ion-card-title>
+
+    </ion-card-header>
+
+    <ion-card-content>
+      <form [formGroup]="CategoryForm">
+        <ion-item>
+          <ion-label position="floating">Category name</ion-label>
+          <ion-input type="text" formControlName="name"></ion-input>
+        </ion-item>
+        <ion-button size="small" slot="end" class="submit_category_button" (click)="submitCategory()" [disabled]="CategoryForm.invalid">Add Category</ion-button>
+      </form>
+    </ion-card-content>
+    </ion-card>
+
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Add Product</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="productForm">
+        <ion-item>
+          <ion-label position="floating">Title</ion-label>
+          <ion-input type="text" formControlName="title"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Category</ion-label>
+          <ion-select formControlName="category">
+            <ion-select-option *ngFor="let cat of categories" [value]="cat?.name">{{ cat?.name | titlecase }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Price</ion-label>
+          <ion-input type="number" formControlName="price"></ion-input>
+        </ion-item>
+
+           <ion-item>
+          <ion-label position="floating">Stock</ion-label>
+          <ion-input type="number" formControlName="quantity"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Description</ion-label>
+          <ion-textarea type="text" formControlName="description"></ion-textarea>
+        </ion-item>
+
+        <div class="upload_section">
+          <ion-button class="form_upload_button" color="secondary" (click)="selectImageSource()">
+            <span>Product Image</span>
+          </ion-button>
+             <input
+              type="file"
+              #fileInput
+              (change)="uploadFile($event)"
+              hidden="true"
+              accept="image/*"
+            /><br>
+            <span  class="doc-name">{{product_images}}<br></span>
+        </div>
+
+        <ion-button expand="block" class="submit_button" (click)="submitFiles()">Add Product</ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+  <ng-template #customLoadingTemplate></ng-template>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
+
+</ion-content>

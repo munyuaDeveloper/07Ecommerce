@@ -3,53 +3,50 @@
     <ion-title>
       Categories
     </ion-title>
+
+  <ion-buttons slot="primary" class="cart_icon" routerLink="/tabs/tab1/cart-items"> 
+   <ion-icon slot="end" name="cart-outline"></ion-icon>{{total_number}}
+  </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content fullscreen>
 
+<ng-template #customLoadingTemplate></ng-template>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
 
 
   <ion-grid  class="no-padding">
     <ion-row class="no-padding">
       <ion-col size="4">
         <ion-list  class="no-padding">
-          <ion-item>
-            <ion-label>Men Shoes</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>Shirts</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>Dress</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>Women Shoes</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>Kids Ware</ion-label>
+          <ion-item *ngFor="let cat of categories">
+            <ion-label (click)="getCategoryProducts(cat?.id)">{{cat?.name | titlecase}}</ion-label>
           </ion-item>
         </ion-list>
       </ion-col>
       <ion-col>
         <ion-card *ngFor="let product of products">
-          <ion-card-header>
+          <ion-card-header  [routerLink]="['/tabs/tab1/product-details', product?.id]">
               <ion-text >{{product?.title}}</ion-text>
           </ion-card-header>
-
-          <img [src]="product?.image" />
+          <span *ngIf="product?.images" [routerLink]="['/tabs/tab1/product-details', product?.id]">
+            <ion-img [src]="product?.images[0]['image']"></ion-img>
+          </span>
           <ion-card-content>
             <ion-grid>
               <ion-row>
                 <ion-col>
-                   <ion-text color="danger">Price: {{product?.price | currency}}</ion-text>
+                  <ion-text class="price_text">Price: {{product?.price | currency}}</ion-text>
                 </ion-col>
                 <ion-col size="2">
-                  <ion-icon name="bag-add-outline" size="3"></ion-icon>
+                  <ion-icon name="cart-outline" size="4" (click)="addToCart(product?.id)"></ion-icon>
                 </ion-col>
               </ion-row>
             </ion-grid>
           </ion-card-content>
         </ion-card>
+
+        <ion-text class="no_products" *ngIf="products.length === 0">No products in category!</ion-text>
       </ion-col>
 
     </ion-row>

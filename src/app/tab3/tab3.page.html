@@ -36,13 +36,15 @@
             <ion-input formControlName="password2" type="password"></ion-input>
           </ion-item>
 
-        <ion-item>
-          <ion-checkbox  formControlName="user_type"></ion-checkbox>
-          <ion-label>Are you a reseller?</ion-label>
+           <ion-item>
+                <ion-checkbox  formControlName="user_type"></ion-checkbox>
+            <ion-label>Are you a reseller?</ion-label>
+       
+          </ion-item>
 
-        </ion-item>
-
-          <ion-button expand="block" class="submit_button" [disabled]="RegistrationForm.invalid" (click)="RegisterUser()">Register</ion-button>
+          <ion-button expand="block" class="submit_button" [disabled]="RegistrationForm.invalid" (click)="RegisterUser()">
+          Register
+          </ion-button>
 
           <ion-text>Do you have an account? <a (click)="openModal()">Login here</a></ion-text>
 
@@ -96,6 +98,31 @@
           Wish Items
         </ion-label>
       </ion-item>
+
+      <ng-template ngxPermissionsOnly="Reseller">
+        <ion-item routerLink='/tabs/reseller'>
+          <ion-text slot="start">
+          <ion-icon name="stats-chart-outline"></ion-icon>
+          </ion-text>
+          <ion-label>
+            My Reseller Account
+          </ion-label>
+        </ion-item>
+      </ng-template>
+
+
+      <ng-template ngxPermissionsOnly="Admin">
+        <ion-item  routerLink='/tabs/admin'>
+          <ion-text slot="start">
+          <ion-icon name="stats-chart-outline"></ion-icon>
+          </ion-text>
+          <ion-label>
+            Admin Management
+          </ion-label>
+        </ion-item>
+      </ng-template>
+     
+
     <ion-button expand="block" class="submit_button"(click)="LogoutUser()">Logout</ion-button>
   </ion-card>
 </ion-content>

@@ -7,6 +7,7 @@ import { Tab3Page } from './tab3.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
 import { Tab3PageRoutingModule } from './tab3-routing.module';
+import { NgxPermissionsModule } from 'ngx-permissions';
 import {NgxLoadingModule} from "ngx-loading";
 
 @NgModule({
@@ -18,6 +19,7 @@ import {NgxLoadingModule} from "ngx-loading";
     ExploreContainerComponentModule,
     RouterModule.forChild([{ path: '', component: Tab3Page }]),
     Tab3PageRoutingModule,
+    NgxPermissionsModule.forChild(),
     NgxLoadingModule.forRoot({})
 
   ],

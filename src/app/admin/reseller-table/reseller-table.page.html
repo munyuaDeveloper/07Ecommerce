@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Reseller Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding ion-margin">
+
+<div class="example-container mat-elevation-z8 table-responsive">
+
+  <mat-table [dataSource]="dataSource" matSort>
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+      <mat-cell *matCellDef="let row; let i=index" data-label="id"> {{i + 1}} </mat-cell>
+    </ng-container>
+
+  
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Reseller </mat-header-cell>
+      <mat-cell *matCellDef="let row" > {{row?.name}}</mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Email </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row?.email}} </mat-cell>
+    </ng-container>
+
+    <!-- Color Column -->
+    <ng-container matColumnDef="products">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Products </mat-header-cell>
+      <mat-cell *matCellDef="let row" > {{row?.products}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
+      <mat-cell *matCellDef="let row"  class="action_icon">
+      <ion-icon name="trash-outline" color="danger"></ion-icon>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;">
+    </mat-row>
+  </mat-table>
+
+  <mat-paginator #ResellerPaginator [length]=dataSource.data.length [pageSize]="5"></mat-paginator>
+</div>
+
+
+</ion-content>

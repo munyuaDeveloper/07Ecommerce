@@ -3,17 +3,35 @@
     <ion-title>
       Home
     </ion-title>
+
+  <ion-buttons slot="primary" class="cart_icon" routerLink="/tabs/tab1/cart-items"> 
+   <ion-icon slot="end" name="cart-outline"></ion-icon>{{total_number}}
+  </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content fullscreen>
+
+<ng-template #customLoadingTemplate></ng-template>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed"  size="small" (click)="getproducts()">
+    <ion-fab-button  class="refresh_btn">
+    <ion-icon name="refresh-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
   <div class="sub-headers">
     <p>Latest In Town</p>
-</div>
+  </div>
   <ion-slides class="slide-padding" pager="true" [options]="slideOptsOne">
-    <ion-slide *ngFor="let product of products_featured">
+    <ion-slide *ngFor="let product of products">
         <div class="container">
-            <ion-img [src]="product.image"></ion-img>
+            <span *ngIf="product?.images">
+              <ion-img [src]="product?.images[0]['image']"></ion-img>
+            </span>
             <h2 class="slidetitle">
                 <span class="block">{{product.title}}</span>
             </h2>
@@ -27,19 +45,20 @@
   <p>Our Products </p>
 </div>
   <ion-card *ngFor="let product of products">
-    <img [src]="product?.image" />
+    <span *ngIf="product?.images" [routerLink]="['/tabs/tab1/product-details', product?.id]">
+      <ion-img [src]="product?.images[0]['image']"></ion-img>
+    </span>
     <ion-card-header>
-      <ion-card-title>{{product?.title}}</ion-card-title>
+      <ion-card-title  [routerLink]="['/tabs/tab1/product-details', product?.id]">{{product?.title}}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-     {{product?.overview}}
      <ion-grid>
       <ion-row>
         <ion-col>
-           <ion-text color="danger">Price: {{product?.price | currency}}</ion-text>
+           <ion-text class="price_text">Price: {{product?.price | currency}}</ion-text>
         </ion-col>
         <ion-col size="2">
-          <ion-icon name="bag-add-outline" size="3"></ion-icon>
+          <ion-icon name="cart-outline" size="4" (click)="addToCart(product?.id)"></ion-icon>
         </ion-col>
       </ion-row>
     </ion-grid>

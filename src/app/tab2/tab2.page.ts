@@ -1,4 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { ToastController } from '@ionic/angular';
+import { ProductService } from '../services/product.service';
 import { ProductInterface } from '../shared/productsInterface';
 
 @Component({
@@ -6,41 +8,82 @@ import { ProductInterface } from '../shared/productsInterface';
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss']
 })
-export class Tab2Page {
+export class Tab2Page implements OnInit {
 
-  products: ProductInterface[] = [
-    {
-      title: 'Product one',
-      overview: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-      price: '64',
-      category: 'Clothes',
-      image: 'https://cdn.cnn.com/cnnnext/dam/assets/200302101200-underscored-ecoshoes-allbirds-runners.jpg'
-    },
-    {
-      title: 'Product Two',
-      overview: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-      price: '25',
-      category: 'Clothes',
-      image: 'https://images.squarespace-cdn.com/content/v1/5442b6cce4b0cf00d1a3bef2/1617994517472-JHJRHEI85WBTG5G6B4BY/ke17ZwdGBToddI8pDm48kIgDQUuZGudwlQpLCqyQEt8UqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2kDbnkgg-pjfVtIexCHLh42QYBHVOhwoS7bw-rX645trdZR9z9mxWb0yLUToVqwSd/ethical-shoe-brands-for-every-occasion-allbirds'
-    },
-    {
-      title: 'Product Three',
-      overview: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-      price: '50',
-      category: 'Clothes',
-      image: 'https://cdn.cnn.com/cnnnext/dam/assets/200302101200-underscored-ecoshoes-allbirds-runners.jpg'
-    },
-    {
-      title: 'Product Four',
-      overview: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-      price: '20',
-      category: 'Clothes',
-      image: 'https://images.squarespace-cdn.com/content/v1/5442b6cce4b0cf00d1a3bef2/1617994517472-JHJRHEI85WBTG5G6B4BY/ke17ZwdGBToddI8pDm48kIgDQUuZGudwlQpLCqyQEt8UqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2kDbnkgg-pjfVtIexCHLh42QYBHVOhwoS7bw-rX645trdZR9z9mxWb0yLUToVqwSd/ethical-shoe-brands-for-every-occasion-allbirds'
-    },
+  products: ProductInterface[] = []
+  total_number = 0
 
-  ]
+  cartItems = [];
+  categories = []
 
+  @ViewChild('customLoadingTemplate', {static: false}) customLoadingTemplate: TemplateRef<any>;
+  loading = false;
+  constructor(private _productService: ProductService,
+    public toastController: ToastController,) {
 
-  constructor() {
+  }
+
+  getCategory(){
+    this._productService.getCategory().subscribe(res=>{
+      this.categories = res['results'];
+    })
+  }
+
+  ngOnInit() {
+    this.loading = true;
+    this._productService.getProducts().subscribe(res => {
+      this.loading = false;
+      this.products = res['results']
+    }, err => {
+      this.loading = false;
+    })
+
+    this.getCategory();
+  
+    this.getCartItems();
+  }
+
+  getCategoryProducts(id) {
+    this.loading = true;
+    this._productService.getProductsByCategory(id).subscribe(res => {
+      this.loading = false;
+      this.products = res['results'][0]['products']
+    }, err => {
+      this.loading = false;
+    })
+  }
+  
+  getCartItems(){
+    this._productService.getCartItems().subscribe(res => {
+      if(res['results']['length']> 0) {
+        this.cartItems = res['results'][0]['cart'];
+        for(let i = 0; i< this.cartItems.length; i++){
+          this.total_number += this.cartItems[i]['products_num'];
+      }
+      }
+    })
+  }
+
+  addToCart(id) {
+    this.loading = true;
+    const body = {
+      product: id
+  }
+    this._productService.addToCart(body).subscribe(res => {
+      this.loading = false;
+      this.presentToast('Product added to cart!')
+      this.getCartItems();
+    }, err => {
+      this.loading = false;
+    })
+  }
+  
+  async presentToast(message) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+      color: 'success',
+    });
+    toast.present();
   }
 }

@@ -1,7 +1,14 @@
 export interface ProductInterface {
-  title: string,
-  overview: string,
-  image: string,
-  category: string,
-  price: string
+	id: number;
+	title: string;
+	description: string;
+	category: Category[];
+	price: any;
+	num_in_stock: number;
+	images?: any;
+}
+
+
+export interface Category {
+	name: string;
 }

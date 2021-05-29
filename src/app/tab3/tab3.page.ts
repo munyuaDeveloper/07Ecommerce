@@ -5,6 +5,8 @@ import {ModalController, ToastController} from '@ionic/angular';
 import {LoginModalPage} from './login-modal/login-modal.page';
 import {AuthenticationService} from './services/authentication.service';
 import jwt_decode from "jwt-decode"
+import { UserDetails, User_role } from './userInterface';
+import { NgxPermissionsService } from 'ngx-permissions';
 
 @Component({
   selector: 'app-tab3',
@@ -21,11 +23,15 @@ export class Tab3Page {
   setEmail: any;
   userDetails: any;
 
+  userProfile: UserDetails;
+  user_roles: User_role[]
+
   constructor(
     public modalController: ModalController,
     public router: Router,
-    public _authService: AuthenticationService,
     private _formBuilder: FormBuilder,
+    public _authService: AuthenticationService,
+    private permissionsService: NgxPermissionsService,
     public toastController: ToastController
   ) {
 
@@ -55,8 +61,8 @@ export class Tab3Page {
       if (res['data']) {
         this.isUserLoggedIn = this._authService.loggedIn()
         if (this.isUserLoggedIn) {
-          // this.GetUserProfile()
-          this.decodeJWT();
+          this.GetUserProfile()
+          // this.router.navigate(['/'])
         }
       }
     })
@@ -65,7 +71,6 @@ export class Tab3Page {
   }
 
   RegisterUser() {
-    this.loading = true;
     if (this.RegistrationForm.value.user_type) {
       this.RegistrationForm.patchValue({
         user_type: 'Reseller'
@@ -106,6 +111,15 @@ export class Tab3Page {
     this._authService.userProfile().subscribe(res => {
       this.loading = false;
     this.userDetails = res['data'];
+
+    this.user_roles = res['data']['user_roles']
+    let roles = []
+    for(let i=0; i< this.user_roles.length; i++) {
+      roles.push(this.user_roles[i]['name'])
+    }
+
+    this.permissionsService.loadPermissions(roles);
+
     }, error => {
       this.loading = false;
     })
@@ -114,12 +128,6 @@ export class Tab3Page {
   LogoutUser() {
     this._authService.logoutUser();
     this.isUserLoggedIn = this._authService.loggedIn()
+    this.permissionsService.flushPermissions();
   }
-
-  decodeJWT() {
-    const token = localStorage.getItem('access_token')
-    const decoded = jwt_decode(token);
-    this.userEmail = decoded['email']
-  }
-
 }
