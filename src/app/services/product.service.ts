@@ -72,11 +72,22 @@ export class ProductService {
   }
 
 
-  uploadImages(files) {
+  // uploadImages(files) {
+  //   const headers = new HttpHeaders()
+  //     .set('Authorization', `Bearer ${localStorage.getItem('access_token')}`);
+  //   return this.http.post<any>(this._upLoadImages, files, {
+  //     headers: headers,
+  //   });
+  // }
+
+
+
+  uploadImage(file) {
     const headers = new HttpHeaders()
       .set('Authorization', `Bearer ${localStorage.getItem('access_token')}`);
-    return this.http.post<any>(this._upLoadImages, files, {
-      headers: headers,
+ 
+    return this.http.post(`${this._upLoadImages}`, file, {
+      headers
     });
   }
 }

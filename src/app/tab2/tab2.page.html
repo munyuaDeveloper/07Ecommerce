@@ -26,7 +26,7 @@
       </ion-col>
       <ion-col>
         <ion-card *ngFor="let product of products">
-          <ion-card-header>
+          <ion-card-header  [routerLink]="['/tabs/tab1/product-details', product?.id]">
               <ion-text >{{product?.title}}</ion-text>
           </ion-card-header>
           <span *ngIf="product?.images" [routerLink]="['/tabs/tab1/product-details', product?.id]">

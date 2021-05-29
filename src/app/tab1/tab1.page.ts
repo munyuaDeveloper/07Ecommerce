@@ -21,23 +21,26 @@ export class Tab1Page implements OnInit {
   };
 
   @ViewChild('customLoadingTemplate', {static: false}) customLoadingTemplate: TemplateRef<any>;
-  loading = true;
+  loading = false;
   constructor(private _productService: ProductService,
     public toastController: ToastController,) {
 
   }
 
 ngOnInit() {
-  this.loading = true;
+  this.getproducts();
+  this.getCartItems();
+}
+getproducts() {
+  this.loading = true;  
   this._productService.getProducts().subscribe(res => {
     this.loading = false;
     this.products = res['results']
   }, err => {
     this.loading = false;
   })
-
-  this.getCartItems();
 }
+
 
 getCartItems(){
   this.total_number = 0

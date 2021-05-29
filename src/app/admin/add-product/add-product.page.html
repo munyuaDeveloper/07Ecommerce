@@ -64,12 +64,17 @@
         </ion-item>
 
         <div class="upload_section">
-          <ion-button class="form_upload_button" color="secondary" (click)="openInput()">
-            <span>Choose image</span>
+          <ion-button class="form_upload_button" color="secondary" (click)="selectImageSource()">
+            <span>Product Image</span>
           </ion-button>
-            <input id="fileInput" hidden type="file" [accept]="'.pdf, .png, .jpeg, .jpg'" multiple
-                   (change)="handleSupportingDocUpload($event)"><br>
-            <span *ngFor="let name of product_images" class="doc-name">{{name}}<br></span>
+             <input
+              type="file"
+              #fileInput
+              (change)="uploadFile($event)"
+              hidden="true"
+              accept="image/*"
+            /><br>
+            <span  class="doc-name">{{product_images}}<br></span>
         </div>
 
         <ion-button expand="block" class="submit_button" (click)="submitFiles()">Add Product</ion-button>

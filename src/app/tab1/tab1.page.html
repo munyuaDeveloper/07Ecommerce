@@ -16,6 +16,11 @@
 <ng-template #customLoadingTemplate></ng-template>
 <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
 
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed"  size="small" (click)="getproducts()">
+    <ion-fab-button  class="refresh_btn">
+    <ion-icon name="refresh-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
 
   <div class="sub-headers">
@@ -44,7 +49,7 @@
       <ion-img [src]="product?.images[0]['image']"></ion-img>
     </span>
     <ion-card-header>
-      <ion-card-title>{{product?.title}}</ion-card-title>
+      <ion-card-title  [routerLink]="['/tabs/tab1/product-details', product?.id]">{{product?.title}}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
      <ion-grid>

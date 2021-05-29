@@ -44,9 +44,6 @@ export class Tab2Page implements OnInit {
   }
 
   getCategoryProducts(id) {
-
-    console.log("id", id);
-    
     this.loading = true;
     this._productService.getProductsByCategory(id).subscribe(res => {
       this.loading = false;

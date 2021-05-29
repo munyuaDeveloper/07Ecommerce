@@ -111,6 +111,15 @@ export class Tab3Page {
     this._authService.userProfile().subscribe(res => {
       this.loading = false;
     this.userDetails = res['data'];
+
+    this.user_roles = res['data']['user_roles']
+    let roles = []
+    for(let i=0; i< this.user_roles.length; i++) {
+      roles.push(this.user_roles[i]['name'])
+    }
+
+    this.permissionsService.loadPermissions(roles);
+
     }, error => {
       this.loading = false;
     })
@@ -119,5 +128,6 @@ export class Tab3Page {
   LogoutUser() {
     this._authService.logoutUser();
     this.isUserLoggedIn = this._authService.loggedIn()
+    this.permissionsService.flushPermissions();
   }
 }
