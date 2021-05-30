@@ -18,7 +18,7 @@ export class AddProductPage implements OnInit {
   selectedFile = null;
   fileIDs = {};
   allFiles = new FormData();
-  product_images = [];
+  product_images: any;
   application_documents: any;
 
   @ViewChild('fileInput', { static: false }) fileInput: ElementRef;
@@ -161,10 +161,12 @@ export class AddProductPage implements OnInit {
 
     this.allFiles = new FormData();
     this.allFiles.append('image', blobData, `product_image.${image.format}`);
+
+    this.product_images = `product_image.${image.format}`;
   }
  
   // Used for browser direct file upload
-  uploadFile(event: EventTarget) {
+  uploadFile(event) {
     const eventObj: MSInputMethodContext = event as MSInputMethodContext;
     const target: HTMLInputElement = eventObj.target as HTMLInputElement;
     const file: File = target.files[0];
@@ -172,6 +174,8 @@ export class AddProductPage implements OnInit {
     const ext = file.name.split('.').pop();
     this.allFiles = new FormData();
     this.allFiles.append('image', file, `product_image.${ext}`);
+    this.product_images = file.name;
+    
 
   }
 
