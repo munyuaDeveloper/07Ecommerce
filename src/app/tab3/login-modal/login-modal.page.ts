@@ -45,6 +45,7 @@ export class LoginModalPage implements OnInit {
     }
 
   }
+
   async presentToast() {
     const toast = await this.toastController.create({
       message: 'Login successful!',

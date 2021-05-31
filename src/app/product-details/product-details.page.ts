@@ -1,9 +1,9 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ToastController } from '@ionic/angular';
-import { Observable } from 'rxjs';
-import { ProductService } from '../services/product.service';
-import { ProductInterface } from '../shared/productsInterface';
+import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {ToastController} from '@ionic/angular';
+import {Observable} from 'rxjs';
+import {ProductService} from '../services/product.service';
+import {ProductInterface} from '../shared/productsInterface';
 
 @Component({
   selector: 'app-product-details',
@@ -24,9 +24,9 @@ export class ProductDetailsPage implements OnInit {
   cartItems = [];
 
   constructor(private productService: ProductService,
-     private route: ActivatedRoute,
-     public toastController: ToastController,) {
-      
+              private route: ActivatedRoute,
+              public toastController: ToastController,) {
+
   }
 
   ngOnInit() {
@@ -40,14 +40,14 @@ export class ProductDetailsPage implements OnInit {
     this.getCartItems();
   }
 
-  getCartItems(){
+  getCartItems() {
     this.total_number = 0
     this.productService.getCartItems().subscribe(res => {
-      if(res['results']['length']> 0) {
+      if (res['results']['length'] > 0) {
         this.cartItems = res['results'][0]['cart'];
-        for(let i = 0; i< this.cartItems.length; i++){
+        for (let i = 0; i < this.cartItems.length; i++) {
           this.total_number += this.cartItems[i]['products_num'];
-      }
+        }
       }
     })
   }
@@ -56,7 +56,7 @@ export class ProductDetailsPage implements OnInit {
     this.loading = true;
     const body = {
       product: this.product_id
-  }
+    }
     this.productService.addToCart(body).subscribe(res => {
       this.loading = false;
       this.presentToast('Product added to cart!')
@@ -65,7 +65,7 @@ export class ProductDetailsPage implements OnInit {
       this.loading = false;
     })
   }
-  
+
   async presentToast(message) {
     const toast = await this.toastController.create({
       message: message,

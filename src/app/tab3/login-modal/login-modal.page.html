@@ -1,18 +1,19 @@
 <ion-header>
   <ion-toolbar>
-      <ion-buttons slot="start">
-          <ion-button color="primary" (click)="dismiss(null)">
-            <span ion-text color="primary" showWhen="ios"></span>
-            <ion-icon name="arrow-back-outline" showWhen="android,windows"></ion-icon>
-          </ion-button>
-        </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-button color="primary" (click)="dismiss(null)">
+        <span ion-text color="primary" showWhen="ios"></span>
+        <ion-icon name="arrow-back-outline" showWhen="android,windows"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>Login</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ng-template #customLoadingTemplate></ng-template>
-  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"
+               [template]="customLoadingTemplate"></ngx-loading>
   <ion-card>
     <ion-card-header>
       <ion-card-title>Login</ion-card-title>

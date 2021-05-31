@@ -1,8 +1,8 @@
-import { Router } from '@angular/router';
-import { environment } from './../../../environments/environment';
-import { Injectable } from '@angular/core';
+import {Router} from '@angular/router';
+import {environment} from './../../../environments/environment';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +10,14 @@ import { Observable } from 'rxjs';
 export class AuthenticationService {
 
   base_url = environment.DEVELOPMENT_API;
-  private _loginUrl = this.base_url + '/auth/login/'
-  private _registerUrl = this.base_url + '/auth/register/'
-  private _refreshTokenUrl = this.base_url + '/auth/login/refresh/'
-  private _userProfile = this.base_url + '/auth/user-profile/'
+  private _loginUrl = this.base_url + '/auth/login/';
+  private _registerUrl = this.base_url + '/auth/register/';
+  private _refreshTokenUrl = this.base_url + '/auth/login/refresh/';
+  private _userProfile = this.base_url + '/auth/user-profile/';
 
 
-  constructor(private http: HttpClient, private _router: Router) { }
+  constructor(private http: HttpClient, private _router: Router) {
+  }
 
 
   // login
@@ -34,11 +35,11 @@ export class AuthenticationService {
     this._router.navigate(['/']);
   }
 
-      // check if the user is logged in
+  // check if the user is logged in
   loggedIn(): boolean {
     if (localStorage.getItem('access_token') === null || localStorage.getItem('access_token') === undefined) {
       return false;
-    } else{
+    } else {
       return true;
     }
   }
@@ -52,11 +53,11 @@ export class AuthenticationService {
     });
   }
 
-  getNewAccessToken(){
+  getNewAccessToken() {
     const body = {
       refresh: localStorage.getItem('refresh_token')
     }
-   return this.http.post(this._refreshTokenUrl, body)
+    return this.http.post(this._refreshTokenUrl, body)
   }
 
   userProfile() {
