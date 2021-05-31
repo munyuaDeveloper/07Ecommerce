@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { AlertController, Platform } from '@ionic/angular';
-import { Location } from '@angular/common';
+import {Component} from '@angular/core';
+import {AlertController, Platform} from '@ionic/angular';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +10,6 @@ import { Location } from '@angular/common';
 export class AppComponent {
   constructor(
     private platform: Platform,
-
     private _location: Location,
     public alertController: AlertController
   ) {

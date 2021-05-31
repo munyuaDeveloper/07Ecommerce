@@ -4,21 +4,23 @@
       Categories
     </ion-title>
 
-  <ion-buttons slot="primary" class="cart_icon" routerLink="/tabs/tab1/cart-items"> 
-   <ion-icon slot="end" name="cart-outline"></ion-icon>{{total_number}}
-  </ion-buttons>
+    <ion-buttons slot="primary" class="cart_icon" routerLink="/tabs/tab1/cart-items">
+      <ion-icon slot="end" name="cart-outline"></ion-icon>
+      {{total_number}}
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content fullscreen>
 
-<ng-template #customLoadingTemplate></ng-template>
-<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
+  <ng-template #customLoadingTemplate></ng-template>
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"
+               [template]="customLoadingTemplate"></ngx-loading>
 
 
-  <ion-grid  class="no-padding">
+  <ion-grid class="no-padding">
     <ion-row class="no-padding">
       <ion-col size="4">
-        <ion-list  class="no-padding">
+        <ion-list class="no-padding">
           <ion-item *ngFor="let cat of categories">
             <ion-label (click)="getCategoryProducts(cat?.id)">{{cat?.name | titlecase}}</ion-label>
           </ion-item>
@@ -26,8 +28,8 @@
       </ion-col>
       <ion-col>
         <ion-card *ngFor="let product of products">
-          <ion-card-header  [routerLink]="['/tabs/tab1/product-details', product?.id]">
-              <ion-text >{{product?.title}}</ion-text>
+          <ion-card-header [routerLink]="['/tabs/tab1/product-details', product?.id]">
+            <ion-text>{{product?.title}}</ion-text>
           </ion-card-header>
           <span *ngIf="product?.images" [routerLink]="['/tabs/tab1/product-details', product?.id]">
             <ion-img [src]="product?.images[0]['image']"></ion-img>
@@ -50,5 +52,5 @@
       </ion-col>
 
     </ion-row>
-    </ion-grid>
+  </ion-grid>
 </ion-content>

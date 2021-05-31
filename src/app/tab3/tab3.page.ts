@@ -5,8 +5,8 @@ import {ModalController, ToastController} from '@ionic/angular';
 import {LoginModalPage} from './login-modal/login-modal.page';
 import {AuthenticationService} from './services/authentication.service';
 import jwt_decode from "jwt-decode"
-import { UserDetails, User_role } from './userInterface';
-import { NgxPermissionsService } from 'ngx-permissions';
+import {UserDetails, User_role} from './userInterface';
+import {NgxPermissionsService} from 'ngx-permissions';
 
 @Component({
   selector: 'app-tab3',
@@ -84,6 +84,7 @@ export class Tab3Page {
       this.loading = false;
     })
   }
+
   loginUser(body) {
     this._authService.loginUser(body).subscribe(res => {
       this.loading = false;
@@ -106,19 +107,20 @@ export class Tab3Page {
     });
     toast.present();
   }
+
   GetUserProfile() {
     this.loading = true;
     this._authService.userProfile().subscribe(res => {
       this.loading = false;
-    this.userDetails = res['data'];
+      this.userDetails = res['data'];
 
-    this.user_roles = res['data']['user_roles']
-    let roles = []
-    for(let i=0; i< this.user_roles.length; i++) {
-      roles.push(this.user_roles[i]['name'])
-    }
+      this.user_roles = res['data']['user_roles']
+      let roles = []
+      for (let i = 0; i < this.user_roles.length; i++) {
+        roles.push(this.user_roles[i]['name'])
+      }
 
-    this.permissionsService.loadPermissions(roles);
+      this.permissionsService.loadPermissions(roles);
 
     }, error => {
       this.loading = false;

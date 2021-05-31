@@ -1,9 +1,9 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
-import { Observable } from 'rxjs';
+import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
-import { ProductInterface } from '../shared/productsInterface';
+import {ProductInterface} from '../shared/productsInterface';
 
 @Injectable({
   providedIn: 'root'
@@ -28,8 +28,7 @@ export class ProductService {
 
   private _deleteCart = this.base_url + '/cart/delete-cart/';
 
-  private _filterProductByCategory  = this.base_url + '/category/category-products?request_id='
-
+  private _filterProductByCategory = this.base_url + '/category/category-products?request_id='
 
 
   constructor(private http: HttpClient, private _router: Router) {
@@ -81,11 +80,10 @@ export class ProductService {
   // }
 
 
-
   uploadImage(file) {
     const headers = new HttpHeaders()
       .set('Authorization', `Bearer ${localStorage.getItem('access_token')}`);
- 
+
     return this.http.post(`${this._upLoadImages}`, file, {
       headers
     });

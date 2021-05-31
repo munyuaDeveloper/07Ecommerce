@@ -1,7 +1,7 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { ToastController } from '@ionic/angular';
-import { ProductService } from '../services/product.service';
-import { ProductInterface } from '../shared/productsInterface';
+import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {ToastController} from '@ionic/angular';
+import {ProductService} from '../services/product.service';
+import {ProductInterface} from '../shared/productsInterface';
 
 @Component({
   selector: 'app-tab2',
@@ -18,13 +18,14 @@ export class Tab2Page implements OnInit {
 
   @ViewChild('customLoadingTemplate', {static: false}) customLoadingTemplate: TemplateRef<any>;
   loading = false;
+
   constructor(private _productService: ProductService,
-    public toastController: ToastController,) {
+              public toastController: ToastController,) {
 
   }
 
-  getCategory(){
-    this._productService.getCategory().subscribe(res=>{
+  getCategory() {
+    this._productService.getCategory().subscribe(res => {
       this.categories = res['results'];
     })
   }
@@ -39,7 +40,7 @@ export class Tab2Page implements OnInit {
     })
 
     this.getCategory();
-  
+
     this.getCartItems();
   }
 
@@ -52,14 +53,14 @@ export class Tab2Page implements OnInit {
       this.loading = false;
     })
   }
-  
-  getCartItems(){
+
+  getCartItems() {
     this._productService.getCartItems().subscribe(res => {
-      if(res['results']['length']> 0) {
+      if (res['results']['length'] > 0) {
         this.cartItems = res['results'][0]['cart'];
-        for(let i = 0; i< this.cartItems.length; i++){
+        for (let i = 0; i < this.cartItems.length; i++) {
           this.total_number += this.cartItems[i]['products_num'];
-      }
+        }
       }
     })
   }
@@ -68,7 +69,7 @@ export class Tab2Page implements OnInit {
     this.loading = true;
     const body = {
       product: id
-  }
+    }
     this._productService.addToCart(body).subscribe(res => {
       this.loading = false;
       this.presentToast('Product added to cart!')
@@ -77,7 +78,7 @@ export class Tab2Page implements OnInit {
       this.loading = false;
     })
   }
-  
+
   async presentToast(message) {
     const toast = await this.toastController.create({
       message: message,
