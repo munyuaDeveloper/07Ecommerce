@@ -3,12 +3,16 @@ import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {ProductService} from '../services/product.service';
 import {ToastController} from '@ionic/angular';
 
+import DummyProducts from '../shared/dummyProducts.json'
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page implements OnInit {
+  products_featured = DummyProducts
+
 
   products: ProductInterface[] = []
   total_number = 0

@@ -1,0 +1,42 @@
+[
+    {
+      "id": 1,
+      "title": "Fashion Grey Ladies Mountaineering Sneakers",
+      "overview": "Mountaineering sneakers female -ladies springs autumn non-slip wear-resistant travel walking shoes casual air cushion outdoor shoes...The shoes are comfortable and durable since the outsole is made of rubber..They are height increasing and fit to exact size..They are available from size 37 to 42 hence every lady can get a pair to rock a cool casual look...Get them at the best price ever with delivery done to your doorstep...Remember to rate the quality of the shoes,we value your feedback.",
+      "price": "200",
+      "category": "Clothes",
+      "image": "../../assets/images/1.jpg"
+    },
+    {
+      "id": 2,
+      "title": "Fashion Fashionable Sneakers For Women",
+      "overview": "Fashion breathable slip-on shoes designed to precision to ensure ease in movement. Fashion Breathable shoes that will enhance your look while keeping your fashionable. The slip on shoe is designed with a side strap that makes it comfortable to put-on and off with ease. Talk of rocking your weekends with a sassy look, then Fashion breathable slip-on is your ideal choice. The shoe is designed for ultimate flexibility in cloth combination that will enhance your classy weekend look. Place your order on Jumia kenya for countrywide delivery to your doorstop.",
+      "price": "1500",
+      "category": "Clothes",
+      "image": "../../assets/images/2.jpg"
+    },
+    {
+      "id": 3,
+      "title": "Vivo Y20, 64 GB + 4 GB (Dual SIM) - Nebula Blue",
+      "overview": "​Our exclusive Multi-Turbo 3.0 includes a Center Turbo that works at the system’s base level, and an AI Turbo that predicts and resolves system abnormalities (often caused by third-party apps) before they happen. From better network performance, to rapid cooling, to smooth AI functions and game play, user experience is now more exhilarating than ever. A new feature in Settings gives you an array of options for customizing screen animations. It can be used when the phone unlocks, recognizes your face, and many other interactions. Place your order for this amazing product from Jumia Kenya and have it delivered to your doorstep at an amazing price",
+      "price": "300",
+      "category": "Phone",
+      "image": "../../assets/images/3.jpg"
+    },
+    {
+      "id": 4,
+      "title": "EA Sports Ps4 Fifa 21",
+      "overview": "Win as one in EA SPORTS FIFA 21 on PlayStation 4, Xbox One, and PC with new ways to team up and Express yourself on the streets and in the stadium. Powered by Frostbite, FIFA 21 raises the game with fresh features that let you enjoy even bigger victories together in Volta football and FIFA Ultimate Team, feel a new level of gameplay realism that rewards you for your creativity and control, manage every moment in Career Mode, and experience unrivalled authenticity that gives you the most true-to-life experience of the world\"s Game.",
+      "price": "500",
+      "category": "Electronic",
+      "image": "../../assets/images/4.jpg"
+    },
+    {
+      "id": 5,
+      "title": "Apple MacBook Pro 13.3",
+      "overview": "Now featuring the Magic Keyboard with a redesigned scissor mechanism, the Space Gray Apple 13.3\" MacBook Pro with Retina Display provides a comfortable and accurate typing experience. The 13.3\" MacBook Pro also features a 13.3\" Retina Display, immersive stereo speakers, all-day battery life, and the power of macOS, all in a portable, compact design",
+      "price": "2500",
+      "category": "Laptops",
+      "image": "../../assets/images/5.jpg"
+    }
+  ]

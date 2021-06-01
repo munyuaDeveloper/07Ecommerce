@@ -16,7 +16,33 @@
   <ng-template #customLoadingTemplate></ng-template>
   <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"
                [template]="customLoadingTemplate"></ngx-loading>
-  <ion-card>
+
+
+  <ion-card *ngIf="showDummyDetails">
+    <ion-card-header>
+      <ion-card-title>
+        {{productDetails?.title}}
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-img [src]="productDetails?.image"></ion-img>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <h3 class="price_text">Price: {{productDetails?.price | currency}}</h3>
+          </ion-col>
+          <ion-col size="2">
+            <ion-icon name="cart-outline" size="4" (click)="addToCart()"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      {{productDetails?.overview}}
+    </ion-card-content>
+
+  </ion-card>
+  <ion-card *ngIf="!showDummyDetails">
     <ion-card-header>
       <ion-card-title>
         {{productDetails?.title}}

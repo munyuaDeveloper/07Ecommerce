@@ -27,19 +27,43 @@
     <p>Latest In Town</p>
   </div>
   <ion-slides class="slide-padding" pager="true" [options]="slideOptsOne">
-    <ion-slide *ngFor="let product of products">
+    <ion-slide *ngFor="let product of products_featured">
         <div class="container">
-            <span *ngIf="product?.images">
-              <ion-img [src]="product?.images[0]['image']"></ion-img>
+            <span *ngIf="product?.image">
+              <ion-img [src]="product?.image"></ion-img>
             </span>
             <h2 class="slidetitle">
-                <span class="block">{{product.title}}</span>
+                <span class="block">{{product?.title}}</span>
             </h2>
             <p class="price">Price {{product?.price | currency}}</p>
         </div>
     </ion-slide>
-
 </ion-slides>
+
+
+<div class="sub-headers">
+  <p>Popular Products </p>
+</div>
+  <ion-card *ngFor="let product of products_featured">
+    <span *ngIf="product?.image" [routerLink]="['/tabs/tab1/product-details', product?.id]">
+      <ion-img [src]="product?.image"></ion-img>
+    </span>
+    <ion-card-header>
+      <ion-card-title  [routerLink]="['/tabs/tab1/product-details', product?.id]">{{product?.title}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+     <ion-grid>
+      <ion-row>
+        <ion-col>
+           <ion-text class="price_text">Price: {{product?.price | currency}}</ion-text>
+        </ion-col>
+        <ion-col size="2">
+          <ion-icon name="cart-outline" size="4" (click)="addToCart(product?.id)"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    </ion-card-content>
+  </ion-card>
 
 <div class="sub-headers">
   <p>Our Products </p>

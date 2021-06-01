@@ -4,6 +4,8 @@ import {ToastController} from '@ionic/angular';
 import {Observable} from 'rxjs';
 import {ProductService} from '../services/product.service';
 import {ProductInterface} from '../shared/productsInterface';
+import DummyProducts from '../shared/dummyProducts.json'
+
 
 @Component({
   selector: 'app-product-details',
@@ -18,10 +20,12 @@ export class ProductDetailsPage implements OnInit {
   };
   @ViewChild('customLoadingTemplate', {static: false}) customLoadingTemplate: TemplateRef<any>;
   loading = false;
-  productDetails: ProductInterface;
+  productDetails: any;
   product_id: any;
   total_number = 0
   cartItems = [];
+  products_featured = DummyProducts;
+  showDummyDetails = false;
 
   constructor(private productService: ProductService,
               private route: ActivatedRoute,
@@ -35,6 +39,16 @@ export class ProductDetailsPage implements OnInit {
     this.productService.getProductDetail(this.product_id).subscribe(res => {
       this.productDetails = res as ProductInterface;
       this.loading = false;
+    }, error=> {
+      this.loading = false;
+       this.products_featured.filter(res => {
+        if (res.id == this.product_id) {
+          this.showDummyDetails = true;
+          this.productDetails = res;
+        }
+        
+      } )
+
     });
 
     this.getCartItems();
