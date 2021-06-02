@@ -7,6 +7,7 @@ import {AuthenticationService} from './services/authentication.service';
 import jwt_decode from "jwt-decode"
 import {UserDetails, User_role} from './userInterface';
 import {NgxPermissionsService} from 'ngx-permissions';
+import { RegistrationModalPage } from './registration-modal/registration-modal.page';
 
 @Component({
   selector: 'app-tab3',
@@ -17,7 +18,7 @@ export class Tab3Page {
   showRegistrationForm = true;
   @ViewChild('customLoadingTemplate', {static: false}) customLoadingTemplate: TemplateRef<any>;
   loading = false;
-  RegistrationForm: FormGroup;
+  LoginForm: FormGroup;
   isUserLoggedIn: boolean;
   userEmail: any;
   setEmail: any;
@@ -38,12 +39,9 @@ export class Tab3Page {
   }
 
   ngOnInit() {
-    this.RegistrationForm = this._formBuilder.group({
+    this.LoginForm = this._formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      name: ['', Validators.required],
-      password: ['', Validators.required],
-      password2: ['', Validators.required],
-      user_type: [null]
+      password: ['', Validators.required]
     })
     this.isUserLoggedIn = this._authService.loggedIn();
     if (this.isUserLoggedIn) {
@@ -54,7 +52,7 @@ export class Tab3Page {
 
   async openModal() {
     const modal = await this.modalController.create({
-      component: LoginModalPage,
+      component: RegistrationModalPage,
     });
 
     modal.onDidDismiss().then(res => {
@@ -62,7 +60,7 @@ export class Tab3Page {
         this.isUserLoggedIn = this._authService.loggedIn()
         if (this.isUserLoggedIn) {
           this.GetUserProfile()
-          // this.router.navigate(['/'])
+          this.router.navigate(['/'])
         }
       }
     })
@@ -70,38 +68,25 @@ export class Tab3Page {
     return await modal.present();
   }
 
-  RegisterUser() {
-    if (this.RegistrationForm.value.user_type) {
-      this.RegistrationForm.patchValue({
-        user_type: 'Reseller'
-      })
-    }
-    const body = this.RegistrationForm.value;
-    this._authService.UserRegistration(body).subscribe(res => {
-      this.loading = false;
-      this.loginUser(body);
-    }, error => {
-      this.loading = false;
-    })
-  }
-
   loginUser(body) {
     this._authService.loginUser(body).subscribe(res => {
       this.loading = false;
       localStorage.setItem('access_token', res['access'])
       localStorage.setItem('refresh_token', res['refresh'])
-      this.presentToast();
+      this.presentToast('Logged in successfully!');
       this.isUserLoggedIn = this._authService.loggedIn();
       this.GetUserProfile()
+
+      this.router.navigate(['/'])
     }, error => {
       this.loading = false;
     });
   }
 
 
-  async presentToast() {
+  async presentToast(message: string) {
     const toast = await this.toastController.create({
-      message: 'Account created successfully!',
+      message: message,
       duration: 2000,
       color: 'success',
     });

@@ -45,6 +45,7 @@ export class Tab1Page implements OnInit {
     }, err => {
       this.loading = false;
     })
+    this.getCartItems();
   }
 
 

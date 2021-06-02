@@ -13,46 +13,25 @@
 
   <ion-card *ngIf="!isUserLoggedIn">
     <ion-card-header>
-      <ion-card-title>Create Account</ion-card-title>
+      <ion-card-title>Login</ion-card-title>
     </ion-card-header>
-    <form [formGroup]="RegistrationForm">
-      <ion-card-content>
-        <ion-item>
-          <ion-label position="floating">Name</ion-label>
-          <ion-input formControlName="name"></ion-input>
-        </ion-item>
 
+      <form [formGroup]="LoginForm">
         <ion-item>
           <ion-label position="floating">Email</ion-label>
-          <ion-input formControlName="email" type="email"></ion-input>
+          <ion-input type="email" formControlName="email"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label position="floating">Password</ion-label>
-          <ion-input formControlName="password" type="password"></ion-input>
+          <ion-input type="password" formControlName="password"></ion-input>
         </ion-item>
 
-        <ion-item>
-          <ion-label position="floating">Confirm password</ion-label>
-          <ion-input formControlName="password2" type="password"></ion-input>
-        </ion-item>
+        <ion-button expand="block" class="submit_button" (click)="loginUser(LoginForm.value)">Login</ion-button>
+        <br>
 
-        <ion-item>
-          <ion-checkbox formControlName="user_type"></ion-checkbox>
-          <ion-label>Are you a reseller?</ion-label>
-
-        </ion-item>
-
-        <ion-button expand="block" class="submit_button" [disabled]="RegistrationForm.invalid" (click)="RegisterUser()">
-          Register
-        </ion-button>
-
-        <ion-text>Do you have an account? <a (click)="openModal()">Login here</a></ion-text>
-
-      </ion-card-content>
-
-    </form>
-
+        <p class="register_link">You don't have an account? <a (click)="openModal()">Register here</a></p>
+      </form>
 
   </ion-card>
 
@@ -78,15 +57,6 @@
         0
       </ion-text>
       <ion-label>
-        Cart items
-      </ion-label>
-    </ion-item>
-
-    <ion-item>
-      <ion-text slot="start">
-        0
-      </ion-text>
-      <ion-label>
         Completed orders
       </ion-label>
     </ion-item>
@@ -97,6 +67,15 @@
       </ion-text>
       <ion-label>
         Wish Items
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-text slot="start">
+    <ion-icon name="hourglass-outline"></ion-icon>
+      </ion-text>
+      <ion-label>
+        History
       </ion-label>
     </ion-item>
 
