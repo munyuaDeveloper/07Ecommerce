@@ -8,10 +8,9 @@ const routes: Routes = [
     component: Tab3Page,
   },
   {
-    path: 'login-modal',
-    loadChildren: () => import('./login-modal/login-modal.module').then( m => m.LoginModalPageModule)
+    path: 'registration-modal',
+    loadChildren: () => import('./registration-modal/registration-modal.module').then( m => m.RegistrationModalPageModule)
   },
-
 ];
 
 @NgModule({

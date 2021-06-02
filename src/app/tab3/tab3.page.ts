@@ -1,10 +1,8 @@
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
-import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, TemplateRef, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {ModalController, ToastController} from '@ionic/angular';
-import {LoginModalPage} from './login-modal/login-modal.page';
 import {AuthenticationService} from './services/authentication.service';
-import jwt_decode from "jwt-decode"
 import {UserDetails, User_role} from './userInterface';
 import {NgxPermissionsService} from 'ngx-permissions';
 import { RegistrationModalPage } from './registration-modal/registration-modal.page';
@@ -58,10 +56,7 @@ export class Tab3Page {
     modal.onDidDismiss().then(res => {
       if (res['data']) {
         this.isUserLoggedIn = this._authService.loggedIn()
-        if (this.isUserLoggedIn) {
-          this.GetUserProfile()
-          this.router.navigate(['/'])
-        }
+        this.loginUser(res['data']);
       }
     })
 

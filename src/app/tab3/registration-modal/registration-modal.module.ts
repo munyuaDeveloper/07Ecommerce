@@ -13,9 +13,8 @@ import { NgxLoadingModule } from 'ngx-loading';
   imports: [
     CommonModule,
     FormsModule,
- 
-    IonicModule,
     ReactiveFormsModule,
+    IonicModule,
     RegistrationModalPageRoutingModule,
     NgxLoadingModule.forRoot({})
   ],

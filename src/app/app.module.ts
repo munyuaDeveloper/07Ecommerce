@@ -1,4 +1,4 @@
-import { LoginModalPageModule } from './tab3/login-modal/login-modal.module';
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -22,7 +22,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     IonicModule.forRoot(),
     AppRoutingModule,
     ReactiveFormsModule,
-    LoginModalPageModule,
     HttpClientModule,
     NgxPermissionsModule.forRoot(),
     BrowserAnimationsModule,
