@@ -2,6 +2,7 @@ import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {ToastController} from '@ionic/angular';
 import {ProductService} from '../services/product.service';
 import {ProductInterface} from '../shared/productsInterface';
+import DummyProducts from '../shared/dummyProducts.json'
 
 @Component({
   selector: 'app-tab2',
@@ -9,6 +10,8 @@ import {ProductInterface} from '../shared/productsInterface';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page implements OnInit {
+
+  products_featured = DummyProducts
 
   products: ProductInterface[] = []
   total_number = 0

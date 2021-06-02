@@ -27,6 +27,28 @@
         </ion-list>
       </ion-col>
       <ion-col>
+      <ion-card *ngFor="let product of products_featured">
+          <span *ngIf="product?.image" [routerLink]="['/tabs/tab1/product-details', product?.id]">
+            <ion-img [src]="product?.image"></ion-img>
+          </span>
+          <ion-card-header>
+            <ion-card-title  [routerLink]="['/tabs/tab1/product-details', product?.id]">{{product?.title}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-text class="price_text">Price: {{product?.price | currency}}</ion-text>
+              </ion-col>
+              <ion-col size="2">
+                <ion-icon name="cart-outline" size="4" (click)="addToCart(product?.id)"></ion-icon>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          </ion-card-content>
+        </ion-card>
+
+
         <ion-card *ngFor="let product of products">
           <ion-card-header [routerLink]="['/tabs/tab1/product-details', product?.id]">
             <ion-text>{{product?.title}}</ion-text>
