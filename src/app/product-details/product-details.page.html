@@ -14,8 +14,8 @@
 
 <ion-content>
   <ng-template #customLoadingTemplate></ng-template>
-  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"
-               [template]="customLoadingTemplate"></ngx-loading>
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate">
+  </ngx-loading>
 
 
   <ion-card *ngIf="showDummyDetails">
@@ -37,7 +37,6 @@
           </ion-col>
         </ion-row>
       </ion-grid>
-
       {{productDetails?.overview}}
     </ion-card-content>
 
