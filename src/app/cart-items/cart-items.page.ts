@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ModalController, ToastController } from '@ionic/angular';
 import { ProductService } from '../services/product.service';
+import { CartDetails } from './interface';
 
 @Component({
   selector: 'app-cart-items',
@@ -14,14 +15,16 @@ export class CartItemsPage implements OnInit {
   displayedColumns = ['id', 'name', 'quantity', 'total', 'actions'];
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild('productPagination', {static: false}) productPagination: MatPaginator;
+  @ViewChild('productPagination', { static: false }) productPagination: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
 
-  @ViewChild('customLoadingTemplate', {static: false}) customLoadingTemplate: TemplateRef<any>;
+  @ViewChild('customLoadingTemplate', { static: false }) customLoadingTemplate: TemplateRef<any>;
   loading = false;
 
   amount_payable = 0;
+
+  cartDetail: CartDetails;
 
   constructor(
     private _productService: ProductService,
@@ -31,7 +34,7 @@ export class CartItemsPage implements OnInit {
   }
 
   ngOnInit() {
-   this.getCartItems();
+    this.getCartItems();
   }
 
   ngAfterViewInit() {
@@ -42,29 +45,29 @@ export class CartItemsPage implements OnInit {
     this.amount_payable = 0;
     this.loading = true;
     this._productService.getCartItems().subscribe(res => {
+      this.cartDetail = res as CartDetails;
       this.loading = false;
-      if(res['results']['length']> 0) {
+      if (res['results']['length'] > 0) {
         this.dataSource.data = res['results'][0]['cart'];
-
-          for(let i = 0; i< this.dataSource.data.length; i++){
-            this.amount_payable += this.dataSource.data[i]['total'];
+        for (let i = 0; i < this.dataSource.data.length; i++) {
+          this.amount_payable += this.dataSource.data[i]['total'];
         }
 
       }
-      
+
     }, err => {
       this.loading = false;
     });
   }
 
-  deleteCartItem(id){
+  deleteCartItem(id) {
     const body = {
       request_id: id
     }
 
-    this._productService.deleteCart(body).subscribe(res=>{
-        this.presentToast('Item removed!')
-        this.getCartItems();
+    this._productService.deleteCart(body).subscribe(res => {
+      this.presentToast('Item removed!')
+      this.getCartItems();
     })
   }
 

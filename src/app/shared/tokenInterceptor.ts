@@ -1,10 +1,10 @@
 import { AuthenticationService } from './../tab3/services/authentication.service';
 
-import {Injectable} from '@angular/core';
-import {HttpInterceptor, HttpRequest, HttpHandler, HttpErrorResponse} from '@angular/common/http';
-import {Observable, throwError, empty, Subject} from 'rxjs';
-import {catchError, tap, switchMap} from 'rxjs/operators';
-import {Router} from '@angular/router';
+import { Injectable } from '@angular/core';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError, empty, Subject } from 'rxjs';
+import { catchError, tap, switchMap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -62,10 +62,10 @@ export class TokenInterceptorService implements HttpInterceptor {
       // append the access token to the request header
       return request.clone({
         setHeaders:
-          {
-            'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
-            'Content-Type': 'application/json'
-          }
+        {
+          'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
+          'Content-Type': 'application/json'
+        }
       });
     }
     return request;

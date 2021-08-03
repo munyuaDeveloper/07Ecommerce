@@ -9,16 +9,24 @@ const routes: Routes = [
   },
   {
     path: 'product-details/:id',
-    loadChildren: () => import('../product-details/product-details.module').then( m => m.ProductDetailsPageModule)
+    loadChildren: () => import('../product-details/product-details.module').then(m => m.ProductDetailsPageModule)
   },
   {
     path: 'cart-items',
-    loadChildren: () => import('../cart-items/cart-items.module').then( m => m.CartItemsPageModule)
+    loadChildren: () => import('../cart-items/cart-items.module').then(m => m.CartItemsPageModule)
   },
+  {
+    path: 'checkout/:cartId',
+    loadChildren: () => import('../checkout/checkout.module').then(m => m.CheckoutPageModule)
+  },
+  {
+    path: 'orders',
+    loadChildren: () => import('../orders/orders.module').then(m => m.OrdersPageModule)
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class Tab1PageRoutingModule {}
+export class Tab1PageRoutingModule { }

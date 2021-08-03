@@ -7,11 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: CartItemsPage
-  }
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class CartItemsPageRoutingModule {}
+export class CartItemsPageRoutingModule { }

@@ -1,9 +1,9 @@
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {Router} from '@angular/router';
-import {Observable} from 'rxjs';
-import {environment} from '../../environments/environment';
-import {ProductInterface} from '../shared/productsInterface';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
+import { ProductInterface } from '../shared/productsInterface';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class ProductService {
 
   private _categories = this.base_url + '/category/category-list';
 
-  private _createCategory = this.base_url + '/category/create-category'
+  private _createCategory = this.base_url + '/category/create-category';
 
   private _upLoadImages = this.base_url + '/fileupload/upload-image';
 
@@ -28,7 +28,11 @@ export class ProductService {
 
   private _deleteCart = this.base_url + '/cart/delete-cart/';
 
-  private _filterProductByCategory = this.base_url + '/category/category-products?request_id='
+  private _createOrder = this.base_url + '/cart/create-order/';
+
+  private _getOrders = this.base_url + '/cart/list-order/';
+
+  private _filterProductByCategory = this.base_url + '/category/category-products?request_id=';
 
 
   constructor(private http: HttpClient, private _router: Router) {
@@ -54,6 +58,10 @@ export class ProductService {
     return this.http.post(this._createProduct, data);
   }
 
+  createOrder(data) {
+    return this.http.post(this._createOrder, data);
+  }
+
   createCategory(data) {
     return this.http.post(this._createCategory, data);
   }
@@ -64,6 +72,10 @@ export class ProductService {
 
   getCartItems() {
     return this.http.get(this._listCart);
+  }
+
+  getOrders() {
+    return this.http.get(this._getOrders);
   }
 
   deleteCart(data) {

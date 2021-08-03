@@ -38,6 +38,17 @@
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/merged_assets/debug/out/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/merged_assets/debug/out/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/cart-items/cart-items-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/cart-items/cart-items-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/cart-items/cart-items.page.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/cart-items/cart-items.page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/cart-items/cart-items.page.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/cart-items/cart-items.page.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/product-details/product-details.page.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/product-details/product-details.page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/services/product.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/services/product.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/shared/tokenInterceptor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/shared/tokenInterceptor.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/tab1/tab1-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/tab1/tab1-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/tab3/tab3.page.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/tab3/tab3.page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/environments/environment.prod.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/environments/environment.prod.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/environments/environment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/environments/environment.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
