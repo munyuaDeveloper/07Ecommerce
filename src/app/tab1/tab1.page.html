@@ -4,7 +4,12 @@
       Home
     </ion-title>
 
-  <ion-buttons slot="primary" class="cart_icon" routerLink="/tabs/tab1/cart-items"> 
+    <ion-buttons slot="primary" class="wish_icon" routerLink="/tabs/tab1/wish-list">
+      <ion-icon slot="end" name="heart-outline"></ion-icon>
+      {{total_wish_number}}
+    </ion-buttons>
+
+  <ion-buttons slot="primary" class="cart_icon" routerLink="/tabs/tab1/cart-items">
    <ion-icon slot="end" name="cart-outline"></ion-icon>{{total_number}}
   </ion-buttons>
 
@@ -57,6 +62,11 @@
         <ion-col>
            <ion-text class="price_text">Price: {{product?.price | currency}}</ion-text>
         </ion-col>
+
+        <ion-col size="2">
+          <ion-icon name="heart-outline"  size="4" (click)="addToWishList(product?.id)"></ion-icon>
+        </ion-col>
+
         <ion-col size="2">
           <ion-icon name="cart-outline" size="4" (click)="addToCart(product?.id)"></ion-icon>
         </ion-col>

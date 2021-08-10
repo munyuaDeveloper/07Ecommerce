@@ -5,6 +5,11 @@
     </ion-buttons>
     <ion-title>Product Details</ion-title>
 
+    <ion-buttons slot="primary" class="wish_icon" routerLink="/tabs/tab1/wish-list">
+      <ion-icon slot="end" name="heart-outline"></ion-icon>
+      {{total_wish_number}}
+    </ion-buttons>
+
     <ion-buttons slot="primary" class="cart_icon" routerLink="/tabs/tab1/cart-items">
       <ion-icon slot="end" name="cart-outline"></ion-icon>
       {{total_number}}
@@ -31,6 +36,9 @@
         <ion-row>
           <ion-col>
             <h3 class="price_text">Price: {{productDetails?.price | currency}}</h3>
+          </ion-col>
+          <ion-col size="2">
+            <ion-icon name="heart-outline"  size="4" (click)="addToWishList(productDetails?.id)"></ion-icon>
           </ion-col>
           <ion-col size="2">
             <ion-icon name="cart-outline" size="4" (click)="addToCart()"></ion-icon>

@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tabs/tab1"></ion-back-button>
     </ion-buttons>
-    <ion-title>My Cart</ion-title>
+    <ion-title>My Wish Items</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,17 +13,6 @@
   </ngx-loading>
 
   <div class="example-container mat-elevation-z8 table-responsive">
-    <ion-grid>
-      <ion-row>
-        <ion-col size="5"></ion-col>
-        <ion-col size="7">
-          <ion-item>
-            <ion-label position="stacked">Search Items</ion-label>
-            <ion-input (keyup)="applyFilter($event)" #input></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
 
     <mat-table [dataSource]="dataSource" matSort>
 
@@ -66,10 +55,10 @@
     <mat-paginator #ResellerPaginator [length]=dataSource.data.length [pageSize]="5"></mat-paginator>
   </div>
 
-  <ion-card *ngIf="cartDetail?.results.length > 0">
+  <ion-card *ngIf="cartDetail.results.length > 0">
     <h4 class="total_price">Total Amount: {{amount_payable | currency}}</h4>
 
-    <ion-button color="primary" expand="block" [routerLink]="['/tabs/tab1/checkout/', cartDetail?.results[0].id]">Proceed to Payment
+    <ion-button color="primary" expand="block" [routerLink]="['/tabs/tab1/checkout/', cartDetail.results[0].id]">Proceed to Payment
     </ion-button>
   </ion-card>
 </ion-content>

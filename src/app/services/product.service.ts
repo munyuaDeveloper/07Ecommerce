@@ -34,6 +34,9 @@ export class ProductService {
 
   private _filterProductByCategory = this.base_url + '/category/category-products?request_id=';
 
+  private _addToWishList = this.base_url + '/addToWishList';
+  private __listWishItems = this.base_url + '/listWishItems';
+
 
   constructor(private http: HttpClient, private _router: Router) {
   }
@@ -70,8 +73,15 @@ export class ProductService {
     return this.http.post(this._addToCart, data);
   }
 
+  addToWishList(data) {
+    return this.http.post(this._addToWishList, data);
+  }
+
   getCartItems() {
     return this.http.get(this._listCart);
+  }
+  getWishItems() {
+    return this.http.get(this.__listWishItems);
   }
 
   getOrders() {

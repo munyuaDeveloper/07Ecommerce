@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
 
-  DEVELOPMENT_API: 'https://ecommerce07-backend.herokuapp.com'
-  // DEVELOPMENT_API: 'https://ecommerce-apis.herokuapp.com'
+  // DEVELOPMENT_API: 'https://ecommerce07-backend.herokuapp.com'
+  DEVELOPMENT_API: 'https://ecommerce-apis.herokuapp.com'
 
   // DEVELOPMENT_API: 'http://127.0.0.1:8000'
 };

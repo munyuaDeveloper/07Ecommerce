@@ -3,17 +3,19 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ModalController, ToastController } from '@ionic/angular';
+import { CartDetails } from '../cart-items/interface';
 import { ProductService } from '../services/product.service';
-import { CartDetails } from './interface';
+
 
 @Component({
-  selector: 'app-cart-items',
-  templateUrl: './cart-items.page.html',
-  styleUrls: ['./cart-items.page.scss'],
+  selector: 'app-wish-list',
+  templateUrl: './wish-list.page.html',
+  styleUrls: ['./wish-list.page.scss'],
 })
-export class CartItemsPage implements OnInit {
+export class WishListPage implements OnInit {
   displayedColumns = ['id', 'name', 'quantity', 'total', 'actions'];
   dataSource = new MatTableDataSource();
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('productPagination', { static: false }) productPagination: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -63,12 +65,12 @@ export class CartItemsPage implements OnInit {
   deleteCartItem(id) {
     const body = {
       request_id: id
-    };
+    }
 
     this._productService.deleteCart(body).subscribe(res => {
-      this.presentToast('Item removed!');
+      this.presentToast('Item removed!')
       this.getCartItems();
-    });
+    })
   }
 
   async presentToast(message) {
@@ -79,9 +81,5 @@ export class CartItemsPage implements OnInit {
     });
     toast.present();
   }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
 }
+
