@@ -24,7 +24,7 @@ export class ProductService {
 
   private _addToCart = this.base_url + '/cart/add-cart/';
 
-  private _listCart = this.base_url + '/cart/cart';
+  private _listCart = this.base_url + '/cart/cart/?search=';
 
   private _deleteCart = this.base_url + '/cart/delete-cart/';
 
@@ -34,8 +34,8 @@ export class ProductService {
 
   private _filterProductByCategory = this.base_url + '/category/category-products?request_id=';
 
-  private _addToWishList = this.base_url + '/addToWishList';
-  private __listWishItems = this.base_url + '/listWishItems';
+  private _addToWishList = this.base_url + '/cart/add-to-wish/';
+  private __listWishItems = this.base_url + '/cart/list-wish-list/';
 
 
   constructor(private http: HttpClient, private _router: Router) {
@@ -77,8 +77,8 @@ export class ProductService {
     return this.http.post(this._addToWishList, data);
   }
 
-  getCartItems() {
-    return this.http.get(this._listCart);
+  getCartItems(search) {
+    return this.http.get(this._listCart + search);
   }
   getWishItems() {
     return this.http.get(this.__listWishItems);

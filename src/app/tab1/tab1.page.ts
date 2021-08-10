@@ -1,7 +1,7 @@
-import { ProductInterface } from '../shared/productsInterface';
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { ProductService } from '../services/product.service';
-import { ToastController } from '@ionic/angular';
+import {ProductInterface} from '../shared/productsInterface';
+import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {ProductService} from '../services/product.service';
+import {ToastController} from '@ionic/angular';
 
 import DummyProducts from '../shared/dummyProducts.json'
 
@@ -24,17 +24,21 @@ export class Tab1Page implements OnInit {
     autoplay: true
   };
 
-  @ViewChild('customLoadingTemplate', { static: false }) customLoadingTemplate: TemplateRef<any>;
+  @ViewChild('customLoadingTemplate', {static: false}) customLoadingTemplate: TemplateRef<any>;
   loading = false;
 
   constructor(private _productService: ProductService,
-    public toastController: ToastController,) {
+              public toastController: ToastController,) {
 
   }
 
   ngOnInit() {
     this.getproducts();
+  }
+
+  ionViewDidEnter() {
     this.getCartItems();
+    this.getWishItems();
   }
 
   getproducts() {
@@ -51,25 +55,22 @@ export class Tab1Page implements OnInit {
 
   getCartItems() {
     this.total_number = 0;
-    this._productService.getCartItems().subscribe(res => {
+    this._productService.getCartItems('').subscribe(res => {
       if (res['results'] && res['results']['length'] > 0) {
         this.cartItems = res['results'][0]['cart'];
         for (let i = 0; i < this.cartItems.length; i++) {
           this.total_number += this.cartItems[i]['products_num'];
-        };
-      };
+        }
+        ;
+      }
+      ;
     });
   }
 
   getWishItems() {
     this.total_wish_number = 0;
     this._productService.getWishItems().subscribe(res => {
-      if (res['results']['length'] > 0) {
-        this.wishItems = res['results'][0]['cart'];
-        for (let i = 0; i < this.wishItems.length; i++) {
-          this.total_wish_number += this.wishItems[i]['products_num'];
-        };
-      };
+      this.total_wish_number = res['count'];
     });
   }
 
@@ -81,7 +82,7 @@ export class Tab1Page implements OnInit {
     this._productService.addToCart(body).subscribe(res => {
       this.loading = false;
       this.presentToast('Product added to cart!')
-      this.getCartItems();
+      this.getWishItems();
     }, err => {
       this.loading = false;
     });
@@ -95,7 +96,7 @@ export class Tab1Page implements OnInit {
     this._productService.addToWishList(body).subscribe(res => {
       this.loading = false;
       this.presentToast('Product added to wishlist!');
-      this.getCartItems();
+      this.getWishItems();
     }, err => {
       this.loading = false;
     });

@@ -34,19 +34,20 @@ export class CartItemsPage implements OnInit {
   }
 
   ngOnInit() {
-    this.getCartItems();
+    this.getCartItems('');
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.productPagination;
   }
 
-  getCartItems() {
+  getCartItems(search) {
     this.amount_payable = 0;
     this.loading = true;
-    this._productService.getCartItems().subscribe(res => {
+    this._productService.getCartItems(search).subscribe(res => {
       this.cartDetail = res as CartDetails;
       this.loading = false;
+      this.dataSource.data = [];
       if (res['results']['length'] > 0) {
         this.dataSource.data = res['results'][0]['cart'];
         for (let i = 0; i < this.dataSource.data.length; i++) {
@@ -67,7 +68,7 @@ export class CartItemsPage implements OnInit {
 
     this._productService.deleteCart(body).subscribe(res => {
       this.presentToast('Item removed!');
-      this.getCartItems();
+      this.getCartItems('');
     });
   }
 
@@ -82,6 +83,6 @@ export class CartItemsPage implements OnInit {
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.getCartItems(filterValue.trim().toLowerCase())
   }
 }

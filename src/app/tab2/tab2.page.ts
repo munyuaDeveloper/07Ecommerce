@@ -17,7 +17,9 @@ export class Tab2Page implements OnInit {
   total_number = 0
 
   cartItems = [];
-  categories = []
+  categories = [];
+  total_wish_number = 0;
+  wishItems = [];
 
   @ViewChild('customLoadingTemplate', {static: false}) customLoadingTemplate: TemplateRef<any>;
   loading = false;
@@ -41,10 +43,11 @@ export class Tab2Page implements OnInit {
     }, err => {
       this.loading = false;
     })
-
     this.getCategory();
-
+  }
+  ionViewDidEnter() {
     this.getCartItems();
+    this.getWishItems();
   }
 
   getCategoryProducts(id) {
@@ -58,7 +61,7 @@ export class Tab2Page implements OnInit {
   }
 
   getCartItems() {
-    this._productService.getCartItems().subscribe(res => {
+    this._productService.getCartItems('').subscribe(res => {
       if (res['results']['length'] > 0) {
         this.cartItems = res['results'][0]['cart'];
         for (let i = 0; i < this.cartItems.length; i++) {
@@ -66,6 +69,13 @@ export class Tab2Page implements OnInit {
         }
       }
     })
+  }
+
+  getWishItems() {
+    this.total_wish_number = 0;
+    this._productService.getWishItems().subscribe(res => {
+      this.total_wish_number = res['count'];
+    });
   }
 
   addToCart(id) {
@@ -76,10 +86,23 @@ export class Tab2Page implements OnInit {
     this._productService.addToCart(body).subscribe(res => {
       this.loading = false;
       this.presentToast('Product added to cart!')
-      this.getCartItems();
+      this.getWishItems();
     }, err => {
       this.loading = false;
     })
+  }
+  addToWishList(id) {
+    this.loading = true;
+    const body = {
+      product: id
+    };
+    this._productService.addToWishList(body).subscribe(res => {
+      this.loading = false;
+      this.presentToast('Product added to wishlist!');
+      this.getCartItems();
+    }, err => {
+      this.loading = false;
+    });
   }
 
   async presentToast(message) {

@@ -7,12 +7,12 @@
 7
 8    <uses-sdk
 9        android:minSdkVersion="21"
-9-->/home/kelvin/Desktop/IONIC/07Ecommerce/android/capacitor-cordova-android-plugins/src/main/AndroidManifest.xml
+9-->/home/peter/Desktop/IONIC/07Ecommerce/android/capacitor-cordova-android-plugins/src/main/AndroidManifest.xml
 10        android:targetSdkVersion="29" />
-10-->/home/kelvin/Desktop/IONIC/07Ecommerce/android/capacitor-cordova-android-plugins/src/main/AndroidManifest.xml
+10-->/home/peter/Desktop/IONIC/07Ecommerce/android/capacitor-cordova-android-plugins/src/main/AndroidManifest.xml
 11
 12    <application>
-12-->/home/kelvin/Desktop/IONIC/07Ecommerce/android/capacitor-cordova-android-plugins/src/main/AndroidManifest.xml:5:1-7:15
+12-->/home/peter/Desktop/IONIC/07Ecommerce/android/capacitor-cordova-android-plugins/src/main/AndroidManifest.xml:5:1-7:15
 13    </application>
 14
 15</manifest>

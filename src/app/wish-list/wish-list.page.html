@@ -31,19 +31,20 @@
       <!-- Color Column -->
       <ng-container matColumnDef="quantity">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Quantity </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row?.products_num}} </mat-cell>
+        <mat-cell *matCellDef="let row"> {{row?.product?.quantity}} </mat-cell>
       </ng-container>
 
       <!-- Name Column -->
       <ng-container matColumnDef="total">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Total </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row?.total | currency}} </mat-cell>
+        <mat-cell *matCellDef="let row"> {{row?.product?.price | currency}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
         <mat-cell *matCellDef="let row" class="action_icon">
-          <ion-icon name="trash-outline" color="danger" (click)="deleteCartItem(row?.id)"></ion-icon>
+          <ion-icon class="item_icon" name="trash-outline" size="5" color="danger" (click)="deleteCartItem(row?.id)"></ion-icon>
+          <ion-icon class="item_icon" name="cart-outline" size="5" (click)="addToCart(row?.product?.id)"></ion-icon>
         </mat-cell>
       </ng-container>
 
@@ -55,10 +56,4 @@
     <mat-paginator #ResellerPaginator [length]=dataSource.data.length [pageSize]="5"></mat-paginator>
   </div>
 
-  <ion-card *ngIf="cartDetail.results.length > 0">
-    <h4 class="total_price">Total Amount: {{amount_payable | currency}}</h4>
-
-    <ion-button color="primary" expand="block" [routerLink]="['/tabs/tab1/checkout/', cartDetail.results[0].id]">Proceed to Payment
-    </ion-button>
-  </ion-card>
 </ion-content>

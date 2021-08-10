@@ -1,10 +1,10 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import { ModalController, ToastController } from '@ionic/angular';
-import { CartDetails } from '../cart-items/interface';
-import { ProductService } from '../services/product.service';
+import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
+import {ModalController, ToastController} from '@ionic/angular';
+import {CartDetails} from '../cart-items/interface';
+import {ProductService} from '../services/product.service';
 
 
 @Component({
@@ -17,11 +17,11 @@ export class WishListPage implements OnInit {
   dataSource = new MatTableDataSource();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild('productPagination', { static: false }) productPagination: MatPaginator;
+  @ViewChild('productPagination', {static: false}) productPagination: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
 
-  @ViewChild('customLoadingTemplate', { static: false }) customLoadingTemplate: TemplateRef<any>;
+  @ViewChild('customLoadingTemplate', {static: false}) customLoadingTemplate: TemplateRef<any>;
   loading = false;
 
   amount_payable = 0;
@@ -36,27 +36,20 @@ export class WishListPage implements OnInit {
   }
 
   ngOnInit() {
-    this.getCartItems();
+    this.getWishItems();
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.productPagination;
   }
 
-  getCartItems() {
+  getWishItems() {
     this.amount_payable = 0;
     this.loading = true;
-    this._productService.getCartItems().subscribe(res => {
+    this._productService.getWishItems().subscribe(res => {
       this.cartDetail = res as CartDetails;
       this.loading = false;
-      if (res['results']['length'] > 0) {
-        this.dataSource.data = res['results'][0]['cart'];
-        for (let i = 0; i < this.dataSource.data.length; i++) {
-          this.amount_payable += this.dataSource.data[i]['total'];
-        }
-
-      }
-
+      this.dataSource.data = res['results'];
     }, err => {
       this.loading = false;
     });
@@ -69,10 +62,22 @@ export class WishListPage implements OnInit {
 
     this._productService.deleteCart(body).subscribe(res => {
       this.presentToast('Item removed!')
-      this.getCartItems();
+      this.getWishItems();
     })
   }
-
+  addToCart(id) {
+    this.loading = true;
+    const body = {
+      product: id
+    };
+    this._productService.addToCart(body).subscribe(res => {
+      this.loading = false;
+      this.presentToast('Product added to cart!')
+      this.getWishItems();
+    }, err => {
+      this.loading = false;
+    });
+  }
   async presentToast(message) {
     const toast = await this.toastController.create({
       message: message,

@@ -52,13 +52,14 @@ export class ProductDetailsPage implements OnInit {
       });
 
     });
-
-    this.getCartItems();
   }
-
+  ionViewDidEnter() {
+    this.getCartItems();
+    this.getWishItems();
+  }
   getCartItems() {
     this.total_number = 0;
-    this.productService.getCartItems().subscribe(res => {
+    this.productService.getCartItems('').subscribe(res => {
       if (res['results']['length'] > 0) {
         this.cartItems = res['results'][0]['cart'];
         for (let i = 0; i < this.cartItems.length; i++) {
@@ -70,12 +71,7 @@ export class ProductDetailsPage implements OnInit {
   getWishItems() {
     this.total_wish_number = 0;
     this.productService.getWishItems().subscribe(res => {
-      if (res['results']['length'] > 0) {
-        this.wishItems = res['results'][0]['cart'];
-        for (let i = 0; i < this.wishItems.length; i++) {
-          this.total_wish_number += this.wishItems[i]['products_num'];
-        };
-      };
+      this.total_wish_number = res['count'];
     });
   }
 
@@ -99,7 +95,7 @@ export class ProductDetailsPage implements OnInit {
     this.productService.addToWishList(body).subscribe(res => {
       this.loading = false;
       this.presentToast('Product added to wishlist!');
-      this.getCartItems();
+      this.getWishItems();
     }, err => {
       this.loading = false;
     });
